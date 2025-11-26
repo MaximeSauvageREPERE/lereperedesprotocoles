@@ -7,10 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity]
 class Admin extends Utilisateur
 {
-    public function __construct()
-    {
-        parent::__construct();
-        // Un admin a automatiquement le rôle ROLE_ADMIN
-        $this->setRoles(['ROLE_ADMIN']);
-    }
+    // Admin hérite de toutes les propriétés de Utilisateur
+    // Le rôle ROLE_ADMIN doit être défini lors de la création dans les fixtures
 }
