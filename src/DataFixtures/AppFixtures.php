@@ -61,7 +61,7 @@ class AppFixtures extends Fixture
         $manager->persist($rubriquePostnatal);
 
         $rubriqueIvg = new Rubrique();
-        $rubriqueIvg->setNom('IVG');
+        $rubriqueIvg->setNom('Interruption Volontaire de Grossesse');
         $rubriqueIvg->setDescription('Protocoles concernant l\'interruption volontaire de grossesse');
         $rubriqueIvg->addDomaine($domaineGynecologie);
         $manager->persist($rubriqueIvg);
@@ -71,6 +71,12 @@ class AppFixtures extends Fixture
         $rubriqueContraception->setDescription('Protocoles concernant la contraception');
         $rubriqueContraception->addDomaine($domainePerinatalite);
         $manager->persist($rubriqueContraception);
+
+        $rubriqueIST = new Rubrique();
+        $rubriqueIST->setNom('Infection sexuellement transmissible');
+        $rubriqueIST->setDescription('Protocoles concernant les infections sexuellement transmissibles');
+        $rubriqueIST->addDomaine($domainePerinatalite);
+        $manager->persist($rubriqueIST);
 
         // Création des Thèmes
         $themeRCIU = new Theme();
@@ -161,7 +167,7 @@ class AppFixtures extends Fixture
         $protocolePE->setTheme($themePE);
         $protocolePE->setFichier('protocole_pre_eclampsie.pdf');
         $manager->persist($protocolePE);
-        
+
         // Création d'un Utilisateur standard
         $utilisateur = new Utilisateur();
         $utilisateur->setNom('GAUCHER');
