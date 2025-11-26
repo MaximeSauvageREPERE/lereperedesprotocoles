@@ -60,11 +60,11 @@ class AppFixtures extends Fixture
         $rubriquePostnatal->addDomaine($domainePerinatalite);
         $manager->persist($rubriquePostnatal);
 
-        $rubriqueIvg = new Rubrique();
-        $rubriqueIvg->setNom('Interruption Volontaire de Grossesse');
-        $rubriqueIvg->setDescription('Protocoles concernant l\'interruption volontaire de grossesse');
-        $rubriqueIvg->addDomaine($domaineGynecologie);
-        $manager->persist($rubriqueIvg);
+        $rubriqueIVG = new Rubrique();
+        $rubriqueIVG->setNom('Interruption Volontaire de Grossesse');
+        $rubriqueIVG->setDescription('Protocoles concernant l\'interruption volontaire de grossesse');
+        $rubriqueIVG->addDomaine($domaineGynecologie);
+        $manager->persist($rubriqueIVG);
 
         $rubriqueContraception = new Rubrique();
         $rubriqueContraception->setNom('Contraception');
@@ -80,7 +80,7 @@ class AppFixtures extends Fixture
 
         // Création des Thèmes
         $themeRCIU = new Theme();
-        $themeRCIU->setNom('RCIU');
+        $themeRCIU->setNom('Retard de croissance intra-utérin');
         $themeRCIU->setRubrique($rubriqueNeonatal);
         $manager->persist($themeRCIU);
 
