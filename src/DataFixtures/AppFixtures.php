@@ -90,7 +90,7 @@ class AppFixtures extends Fixture
         $manager->persist($themeMIN);
 
         $themeViolences = new Theme();
-        $themeViolences->setNom('Violences');
+        $themeViolences->setNom('Dépistage des violences');
         $themeViolences->setRubrique($rubriquePostnatal);
         $manager->persist($themeViolences);
 
@@ -100,7 +100,7 @@ class AppFixtures extends Fixture
         $manager->persist($themeTabac);
 
         $themeVaccination = new Theme();
-        $themeVaccination->setNom('Vaccination');
+        $themeVaccination->setNom('Vaccination et grossesse');
         $themeVaccination->setRubrique($rubriqueAntenatal);
         $manager->persist($themeVaccination);
 
