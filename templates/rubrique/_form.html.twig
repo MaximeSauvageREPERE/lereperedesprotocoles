@@ -5,5 +5,10 @@
     <div class="mb-3">
         {{ form_row(form.description, {'attr': {'class': 'form-control', 'placeholder': 'Description de la rubrique', 'rows': 4}}) }}
     </div>
+    <div class="mb-3">
+        <div>
+            {{ form_row(form.domaines) }}
+        </div>
+    </div>
     {# Le bouton submit est placé dans le card-footer de new/edit via l'attribut form="#" #}
 {{ form_end(form) }}
