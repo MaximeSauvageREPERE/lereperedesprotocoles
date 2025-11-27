@@ -18,7 +18,7 @@ class RubriqueType extends AbstractType
             ->add('description')
             ->add('domaines', EntityType::class, [
                 'class' => Domaine::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nom',
                 'multiple' => true,
             ])
         ;

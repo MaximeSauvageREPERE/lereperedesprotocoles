@@ -13,6 +13,7 @@
         <thead class="table-dark">
             <tr>
                 <th class="text-center">Nom</th>
+                <th class="text-center">Domaine associé</th>
                 <th class="text-center">Description</th>
                 <th class="text-center">Actions</th>
             </tr>
@@ -21,6 +22,15 @@
         {% for rubrique in rubriques %}
             <tr>
                 <td class="text-center">{{ rubrique.nom }}</td>
+                <td class="text-center align-middle">
+                    {% if rubrique.domaines is not empty %}
+                        {% for domaine in rubrique.domaines %}
+                            <span class="badge bg-light text-dark">{{ domaine.nom }}</span>
+                        {% endfor %}
+                    {% else %}
+                        —
+                    {% endif %}
+                </td>
                 <td class="text-center">{{ rubrique.description }}</td>
                 <td class="text-center">
                     <div class="d-flex flex-row justify-content-center align-items-center gap-1">
