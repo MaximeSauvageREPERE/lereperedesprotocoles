@@ -3,28 +3,30 @@
 {% block title %}Domaine{% endblock %}
 
 {% block body %}
-    <h1>Domaine</h1>
+    <div class="d-flex justify-content-between align-items-center mb-3 rounded-4 p-3">
+        <h1 class="mb-0">Détail du domaine</h1>
+        <a href="{{ path('app_domaine_index') }}" class="btn btn-success">Retour à la liste</a>
+    </div>
 
-    <table class="table">
+    <table class="table table-bordered table-hover table-striped align-middle shadow-sm rounded overflow-hidden rounded-4">
+        <thead class="table-dark">
+            <tr>
+                <th class="text-center">Nom</th>
+                <th class="text-center">Description</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ domaine.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ domaine.nom }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ domaine.description }}</td>
+                <td class="text-center align-middle">{{ domaine.nom }}</td>
+                <td class="text-center align-middle">{{ domaine.description }}</td>
+                <td class="text-center align-middle" style="width: 180px;">
+                    <div class="d-flex flex-row justify-content-center align-items-center gap-1">
+                        <a class="btn btn-outline-secondary w-100" href="{{ path('app_domaine_edit', {'id': domaine.id}) }}">Modifier</a>
+                        {{ include('domaine/_delete_form.html.twig') }}
+                    </div>
+                </td>
             </tr>
         </tbody>
     </table>
-
-    <a href="{{ path('app_domaine_index') }}">back to list</a>
-
-    <a href="{{ path('app_domaine_edit', {'id': domaine.id}) }}">edit</a>
-
-    {{ include('domaine/_delete_form.html.twig') }}
 {% endblock %}

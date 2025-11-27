@@ -1,4 +1,4 @@
 <form method="post" action="{{ path('app_domaine_delete', {'id': domaine.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer le domaine {{ domaine.nom }} ?');" style="display: inline;">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ domaine.id) }}">
-    <button class="btn btn-danger">Supprimer</button>
+    <button class="btn btn-outline-danger">Supprimer</button>
 </form>
