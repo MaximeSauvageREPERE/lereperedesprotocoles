@@ -3,15 +3,15 @@
 {% block title %}Modifier Domaine{% endblock %}
 
 {% block body %}
+    <div class="d-flex justify-content-between align-items-center mb-3 p-3">
+        <h1 class="mb-0">Modifier un domaine</h1>
+        <a href="{{ path('app_domaine_index') }}" class="btn btn-secondary">Retour à la liste</a>
+    </div>
     <div class="card shadow-sm mb-4">
-        <div class="card-header text-center bg-black">
-            <h2 class="mb-0 text-white">Modifier le domaine</h2>
-        </div>
         <div class="card-body">
             {{ include('domaine/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
         </div>
         <div class="card-footer d-flex justify-content-end gap-2 bg-white">
-            <a href="{{ path('app_domaine_index') }}" class="btn btn-outline-secondary">Retour à la liste</a>
             <button type="submit" form="domaine_form" class="btn btn-outline-primary">{{ 'Mettre à jour' }}</button>
             {{ include('domaine/_delete_form.html.twig') }}
         </div>
