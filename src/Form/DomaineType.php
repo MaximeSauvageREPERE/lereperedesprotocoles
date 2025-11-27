@@ -3,8 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Domaine;
-use App\Entity\Rubrique;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,11 +14,6 @@ class DomaineType extends AbstractType
         $builder
             ->add('nom')
             ->add('description')
-            ->add('rubriques', EntityType::class, [
-                'class' => Rubrique::class,
-                'choice_label' => 'id',
-                'multiple' => true,
-            ])
         ;
     }
 

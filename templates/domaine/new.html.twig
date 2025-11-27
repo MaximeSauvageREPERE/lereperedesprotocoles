@@ -3,9 +3,15 @@
 {% block title %}New Domaine{% endblock %}
 
 {% block body %}
-    <h1>Create new Domaine</h1>
-
-    {{ include('domaine/_form.html.twig') }}
-
-    <a href="{{ path('app_domaine_index') }}">back to list</a>
+    <div class="card shadow-sm mb-4">
+        <div class="card-header text-center" style="background-color: #FFD2EB;">
+            <h2 class="mb-0">Créer un nouveau domaine</h2>
+        </div>
+        <div class="card-body">
+            {{ include('domaine/_form.html.twig', {'button_label': 'Créer'}) }}
+        </div>
+        <div class="card-footer bg-white">
+            <a href="{{ path('app_domaine_index') }}" class="btn btn-outline-secondary">Retour à la liste</a>
+        </div>
+    </div>
 {% endblock %}
