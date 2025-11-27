@@ -3,12 +3,11 @@
 {% block title %}Domaine index{% endblock %}
 
 {% block body %}
-    <h1>Domaine index</h1>
+    <h1 class="text-center">Liste des domaines</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nom</th>
                 <th>Description</th>
                 <th>actions</th>
@@ -17,21 +16,21 @@
         <tbody>
         {% for domaine in domaines %}
             <tr>
-                <td>{{ domaine.id }}</td>
                 <td>{{ domaine.nom }}</td>
                 <td>{{ domaine.description }}</td>
                 <td>
-                    <a href="{{ path('app_domaine_show', {'id': domaine.id}) }}">show</a>
-                    <a href="{{ path('app_domaine_edit', {'id': domaine.id}) }}">edit</a>
+                    <a href="{{ path('app_domaine_show', {'id': domaine.id}) }}">Voir</a>
+                    <a href="{{ path('app_domaine_edit', {'id': domaine.id}) }}">Modifier</a>
+                    {{ include('domaine/_delete_form.html.twig', { 'domaine': domaine }) }}
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="3">Aucun domaine trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_domaine_new') }}">Create new</a>
+    <a href="{{ path('app_domaine_new') }}">Ajouter un domaine</a>
 {% endblock %}
