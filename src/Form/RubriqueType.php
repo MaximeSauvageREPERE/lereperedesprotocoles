@@ -20,6 +20,9 @@ class RubriqueType extends AbstractType
                 'class' => Domaine::class,
                 'choice_label' => 'nom',
                 'multiple' => true,
+                'expanded' => false, // render as a select (liste déroulante)
+                'by_reference' => false,
+                'attr' => ['class' => 'form-select'],
             ])
         ;
     }
