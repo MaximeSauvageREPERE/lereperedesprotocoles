@@ -3,34 +3,40 @@
 {% block title %}Domaine index{% endblock %}
 
 {% block body %}
-    <h1 class="text-center">Liste des domaines</h1>
 
-    <table class="table">
-        <thead>
+    <div class="d-flex justify-content-between align-items-center mb-3 rounded-4 p-3">
+        <h1 class="mb-0">Liste des domaines</h1>
+        <a href="{{ path('app_domaine_new') }}" class="btn btn-success">Ajouter un domaine</a>
+    </div>
+
+    <table class="table table-bordered table-hover table-striped align-middle shadow-sm rounded overflow-hidden rounded-4">
+        <thead class="table-dark">
             <tr>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>actions</th>
+                <th class="text-center">Nom</th>
+                <th class="text-center">Description</th>
+                <th class="text-center">Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for domaine in domaines %}
             <tr>
-                <td>{{ domaine.nom }}</td>
-                <td>{{ domaine.description }}</td>
-                <td>
-                    <a href="{{ path('app_domaine_show', {'id': domaine.id}) }}">Voir</a>
-                    <a href="{{ path('app_domaine_edit', {'id': domaine.id}) }}">Modifier</a>
-                    {{ include('domaine/_delete_form.html.twig', { 'domaine': domaine }) }}
+                <td class="text-center">{{ domaine.nom }}</td>
+                <td class="text-center">{{ domaine.description }}</td>
+                <td class="text-center">
+                    <div class="d-flex flex-row justify-content-center align-items-center gap-1">
+                        <a href="{{ path('app_domaine_show', {'id': domaine.id}) }}" class="btn btn-primary">Voir</a>
+                        <a href="{{ path('app_domaine_edit', {'id': domaine.id}) }}" class="btn btn-secondary">Modifier</a>
+                        {{ include('domaine/_delete_form.html.twig', { 'domaine': domaine }) }}
+                    </div>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">Aucun domaine trouvé</td>
+                <td colspan="3" class="text-center fst-italic">Aucun domaine trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_domaine_new') }}">Ajouter un domaine</a>
+
 {% endblock %}
