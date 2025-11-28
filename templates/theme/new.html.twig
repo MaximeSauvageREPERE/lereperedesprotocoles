@@ -3,15 +3,16 @@
 {% block title %}Nouveau Thème{% endblock %}
 
 {% block body %}
-    <div class="card shadow-sm mb-4">
-        <div class="card-header text-center" style="background-color: #FFD2EB;">
-            <h2 class="mb-0">Créer un nouveau thème</h2>
-        </div>
+    <div class="d-flex justify-content-between align-items-center mb-3 p-3">
+        <h1 class="mb-0">Créer un nouveau thème</h1>
+        <a href="{{ path('app_theme_index') }}" class="btn btn-secondary">Retour à la liste</a>
+    </div>
+    <div class="card shadow-sm mb-4 bg-light">
         <div class="card-body">
             {{ include('theme/_form.html.twig', {'button_label': 'Créer'}) }}
         </div>
-        <div class="card-footer bg-white">
-            <a href="{{ path('app_theme_index') }}" class="btn btn-outline-secondary">Retour à la liste</a>
+        <div class="card-footer d-flex justify-content-end gap-2 bg-light">
+            <button type="submit" form="theme_form" class="btn btn-outline-primary">{{ 'Créer' }}</button>
         </div>
     </div>
 {% endblock %}
