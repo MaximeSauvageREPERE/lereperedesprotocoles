@@ -1,4 +1,9 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_start(form, {'attr': {'id': 'theme_form'}}) }}
+    <div class="mb-3">
+        {{ form_row(form.nom, {'attr': {'class': 'form-control', 'placeholder': 'Nom du thème'}}) }}
+    </div>
+    <div class="mb-3">
+        {{ form_row(form.rubrique, {'attr': {'class': 'form-select'}}) }}
+    </div>
+    {# Le bouton submit est placé dans le card-footer de new/edit via l'attribut form="#" #}
 {{ form_end(form) }}

@@ -17,7 +17,7 @@ class ThemeType extends AbstractType
             ->add('nom')
             ->add('rubrique', EntityType::class, [
                 'class' => Rubrique::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nom',
             ])
         ;
     }
