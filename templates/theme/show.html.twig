@@ -3,24 +3,46 @@
 {% block title %}Theme{% endblock %}
 
 {% block body %}
-    <h1>Theme</h1>
+    <div class="d-flex justify-content-between align-items-center mb-3 rounded-4 p-3">
+        <h1 class="mb-0">Détail du thème</h1>
+        <a href="{{ path('app_theme_index') }}" class="btn btn-secondary">Retour à la liste</a>
+    </div>
 
-    <table class="table">
+    <table class="table table-bordered table-hover table-striped align-middle shadow-sm rounded overflow-hidden rounded-4">
+        <thead class="table-dark">
+            <tr>
+                <th class="text-center">Nom</th>
+                <th class="text-center">Rubrique associé</th>
+                <th class="text-center">Domaine associé</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ theme.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ theme.nom }}</td>
+                <td class="text-center align-middle">{{ theme.nom }}</td>
+                <td class="text-center align-middle">
+                    {% if theme.rubrique %}
+                        <span class="badge bg-light text-dark">{{ theme.rubrique.nom }}</span>
+                    {% else %}
+                        —
+                    {% endif %}
+                </td>
+                <td class="text-center align-middle">
+                    {% if theme.rubrique and theme.rubrique.domaines is not empty %}
+                        {% for domaine in theme.rubrique.domaines %}
+                            <span class="badge bg-light text-dark">{{ domaine.nom }}</span>
+                        {% endfor %}
+                    {% else %}
+                        —
+                    {% endif %}
+                </td>
+                <td class="text-center align-middle" style="width: 180px;">
+                    <div class="d-flex flex-row justify-content-center align-items-center gap-1">
+                        <a class="btn btn-outline-warning w-100" href="{{ path('app_theme_edit', {'id': theme.id}) }}">Modifier</a>
+                        {{ include('theme/_delete_form.html.twig') }}
+                    </div>
+                </td>
             </tr>
         </tbody>
     </table>
-
-    <a href="{{ path('app_theme_index') }}">back to list</a>
-
-    <a href="{{ path('app_theme_edit', {'id': theme.id}) }}">edit</a>
-
-    {{ include('theme/_delete_form.html.twig') }}
 {% endblock %}
