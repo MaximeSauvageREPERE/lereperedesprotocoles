@@ -1,13 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Protocole{% endblock %}
+{% block title %}Modifier Protocole{% endblock %}
 
 {% block body %}
-    <h1>Edit Protocole</h1>
-
-    {{ include('protocole/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_protocole_index') }}">back to list</a>
-
-    {{ include('protocole/_delete_form.html.twig') }}
+    <div class="d-flex justify-content-between align-items-center mb-3 p-3">
+        <h1 class="mb-0">Modifier un protocole</h1>
+        <a href="{{ path('app_protocole_index') }}" class="btn btn-secondary">Retour à la liste</a>
+    </div>
+    <div class="card shadow-sm mb-4 bg-light">
+        <div class="card-body">
+            {{ include('protocole/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+        </div>
+        <div class="card-footer d-flex justify-content-end gap-2 bg-light">
+            <button type="submit" form="protocole_form" class="btn btn-outline-primary">{{ 'Mettre à jour' }}</button>
+            {{ include('protocole/_delete_form.html.twig') }}
+        </div>
+    </div>
 {% endblock %}

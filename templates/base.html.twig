@@ -40,7 +40,7 @@
 
         {# Importmap / autres scripts dans le head (conserve l'importmap existant) #}
         {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
+            {# {% block importmap %}{{ importmap('app') }}{% endblock %} #}
         {% endblock %}
     </head>
     <body>

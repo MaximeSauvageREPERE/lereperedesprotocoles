@@ -18,7 +18,7 @@ class ProtocoleType extends AbstractType
             ->add('fichier')
             ->add('theme', EntityType::class, [
                 'class' => Theme::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nom',
             ])
         ;
     }

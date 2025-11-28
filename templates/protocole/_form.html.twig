@@ -1,4 +1,14 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_start(form, {'attr': {'id': 'protocole_form'}}) }}
+    <div class="row g-3">
+        <div class="col-12 col-md-6">
+            {{ form_row(form.nom, {'attr': {'class': 'form-control', 'placeholder': 'Nom du protocole'}}) }}
+        </div>
+        <div class="col-12 col-md-6">
+            {{ form_row(form.theme, {'attr': {'class': 'form-select'}}) }}
+        </div>
+        <div class="col-12">
+            {{ form_row(form.fichier, {'attr': {'class': 'form-control', 'placeholder': 'Nom du fichier'}}) }}
+        </div>
+    </div>
+    {# Le bouton de soumission est dans le card-footer de la vue edit/new #}
 {{ form_end(form) }}
