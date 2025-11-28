@@ -12,11 +12,31 @@
                     <i class="bi bi-file-earmark-pdf"></i> Fichier PDF du protocole
                 </div>
                 <div class="card-body">
-                    {{ form_row(form.pdfFile, {
-                        'label': false,
-                        'attr': {'class': 'form-control'}
-                    }) }}
-                    <small class="form-text text-muted">
+                    {# Afficher le fichier actuel s'il existe #}
+                    {% if form.vars.data.fichier %}
+                        <div class="alert alert-success d-flex align-items-center justify-content-between mb-3">
+                            <div>
+                                <i class="bi bi-file-earmark-pdf-fill me-2"></i>
+                                <strong>Fichier actuel :</strong>
+                                <a href="{{ vich_uploader_asset(form.vars.data, 'pdfFile') }}" target="_blank" class="alert-link">
+                                    {{ form.vars.data.fichier }}
+                                </a>
+                            </div>
+                            {% if form.vars.data.updatedAt %}
+                                <div class="text-muted">
+                                    <small>
+                                        <i class="bi bi-clock"></i>
+                                        Uploadé le {{ form.vars.data.updatedAt|date('d/m/Y à H:i') }}
+                                    </small>
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    
+                    {# Widget d'upload complet (géré par VichUploader) #}
+                    {{ form_row(form.pdfFile, {'label': 'Choisir un nouveau fichier PDF', 'attr': {'class': 'form-control'}}) }}
+                    
+                    <small class="form-text text-muted mt-2 d-block">
                         <i class="bi bi-info-circle"></i> Formats acceptés : PDF uniquement. Taille maximale : 10 Mo
                     </small>
                 </div>
