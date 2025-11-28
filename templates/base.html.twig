@@ -54,21 +54,24 @@
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        {# Récupère la route courante pour marquer le lien actif #}
+                        {% set current_route = app.request.attributes.get('_route') %}
+
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Accueil</a>
+                                <a class="nav-link {% if current_route is defined and current_route == 'app_home' %}active{% endif %}" href="#" {% if current_route is defined and current_route == 'app_home' %}aria-current="page"{% endif %}>Accueil</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path('app_domaine_index') }}">Domaines</a>
+                                <a class="nav-link {% if current_route is defined and (current_route == 'app_domaine_index' or current_route starts with('app_domaine')) %}active{% endif %}" href="{{ path('app_domaine_index') }}" {% if current_route is defined and (current_route == 'app_domaine_index' or current_route starts with('app_domaine')) %}aria-current="page"{% endif %}>Domaines</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path('app_rubrique_index') }}">Rubriques</a>
+                                <a class="nav-link {% if current_route is defined and (current_route == 'app_rubrique_index' or current_route starts with('app_rubrique')) %}active{% endif %}" href="{{ path('app_rubrique_index') }}" {% if current_route is defined and (current_route == 'app_rubrique_index' or current_route starts with('app_rubrique')) %}aria-current="page"{% endif %}>Rubriques</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path('app_theme_index') }}">Thèmes</a>
+                                <a class="nav-link {% if current_route is defined and (current_route == 'app_theme_index' or current_route starts with('app_theme')) %}active{% endif %}" href="{{ path('app_theme_index') }}" {% if current_route is defined and (current_route == 'app_theme_index' or current_route starts with('app_theme')) %}aria-current="page"{% endif %}>Thèmes</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path('app_protocole_index') }}">Protocoles</a>
+                                <a class="nav-link {% if current_route is defined and (current_route == 'app_protocole_index' or current_route starts with('app_protocole')) %}active{% endif %}" href="{{ path('app_protocole_index') }}" {% if current_route is defined and (current_route == 'app_protocole_index' or current_route starts with('app_protocole')) %}aria-current="page"{% endif %}>Protocoles</a>
                             </li>
                         </ul>
                         <ul class="navbar-nav ms-auto">
