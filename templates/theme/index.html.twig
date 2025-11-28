@@ -1,35 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Theme index{% endblock %}
+{% block title %}Liste des Thèmes{% endblock %}
 
 {% block body %}
-    <h1>Theme index</h1>
 
-    <table class="table">
-        <thead>
+    <div class="d-flex justify-content-between align-items-center mb-3 p-3">
+        <h1 class="mb-0">Liste des thèmes</h1>
+        <a href="{{ path('app_theme_new') }}" class="btn btn-success">Ajouter un thème</a>
+    </div>
+
+    <table class="table table-bordered table-hover table-striped align-middle shadow-sm rounded overflow-hidden rounded-4">
+        <thead class="table-dark">
             <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>actions</th>
+                <th class="text-center">Nom</th>
+                <th class="text-center">Domaine associé</th>
+                <th class="text-center">Rubrique associée</th>
+                <th class="text-center">Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for theme in themes %}
             <tr>
-                <td>{{ theme.id }}</td>
-                <td>{{ theme.nom }}</td>
-                <td>
-                    <a href="{{ path('app_theme_show', {'id': theme.id}) }}">show</a>
-                    <a href="{{ path('app_theme_edit', {'id': theme.id}) }}">edit</a>
+                <td class="text-center">{{ theme.nom }}</td>
+                <td class="text-center align-middle">
+                    {% if theme.rubrique and theme.rubrique.domaines is not empty %}
+                        {% for domaine in theme.rubrique.domaines %}
+                            <span class="badge bg-light text-dark">{{ domaine.nom }}</span>
+                        {% endfor %}
+                    {% else %}
+                        —
+                    {% endif %}
+                </td>
+                <td class="text-center align-middle">
+                    {% if theme.rubrique %}
+                        <span class="badge bg-light text-dark">{{ theme.rubrique.nom }}</span>
+                    {% else %}
+                        —
+                    {% endif %}
+                </td>
+                <td class="text-center">
+                    <div class="d-flex flex-row justify-content-center align-items-center gap-1">
+                        <a href="{{ path('app_theme_show', {'id': theme.id}) }}" class="btn btn-outline-primary">Voir</a>
+                        <a href="{{ path('app_theme_edit', {'id': theme.id}) }}" class="btn btn-outline-warning">Modifier</a>
+                        {{ include('theme/_delete_form.html.twig', { 'theme': theme }) }}
+                    </div>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="4" class="text-center fst-italic">Aucun thème trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_theme_new') }}">Create new</a>
+
 {% endblock %}
