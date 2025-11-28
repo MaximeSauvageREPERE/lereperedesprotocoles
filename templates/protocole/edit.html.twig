@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Protocole{% endblock %}
+
+{% block body %}
+    <h1>Edit Protocole</h1>
+
+    {{ include('protocole/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_protocole_index') }}">back to list</a>
+
+    {{ include('protocole/_delete_form.html.twig') }}
+{% endblock %}
