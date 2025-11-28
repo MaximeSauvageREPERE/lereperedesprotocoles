@@ -3,28 +3,40 @@
 {% block title %}Protocole{% endblock %}
 
 {% block body %}
-    <h1>Protocole</h1>
+    <div class="d-flex justify-content-between align-items-center mb-3 rounded-4 p-3">
+        <h1 class="mb-0">Détail du protocole</h1>
+        <a href="{{ path('app_protocole_index') }}" class="btn btn-secondary">Retour à la liste</a>
+    </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ protocole.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ protocole.nom }}</td>
-            </tr>
-            <tr>
-                <th>Fichier</th>
-                <td>{{ protocole.fichier }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_protocole_index') }}">back to list</a>
-
-    <a href="{{ path('app_protocole_edit', {'id': protocole.id}) }}">edit</a>
-
-    {{ include('protocole/_delete_form.html.twig') }}
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover table-striped align-middle shadow-sm rounded overflow-hidden rounded-4">
+            <thead class="table-dark">
+                <tr>
+                    <th class="text-center">Nom</th>
+                    <th class="text-center">Thème associé</th>
+                    <th class="text-center">Fichier</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center align-middle">{{ protocole.nom }}</td>
+                    <td class="text-center align-middle">
+                        {% if protocole.theme %}
+                            <span class="badge bg-light text-dark">{{ protocole.theme.nom }}</span>
+                        {% else %}
+                            —
+                        {% endif %}
+                    </td>
+                    <td class="text-center align-middle">{{ protocole.fichier ?: '—' }}</td>
+                    <td class="text-center align-middle" style="width: 180px;">
+                        <div class="d-flex flex-row justify-content-center align-items-center gap-1">
+                            <a class="btn btn-outline-warning w-100" href="{{ path('app_protocole_edit', {'id': protocole.id}) }}">Modifier</a>
+                            {{ include('protocole/_delete_form.html.twig') }}
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

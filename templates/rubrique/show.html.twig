@@ -8,35 +8,37 @@
         <a href="{{ path('app_rubrique_index') }}" class="btn btn-secondary">Retour à la liste</a>
     </div>
 
-    <table class="table table-bordered table-hover table-striped align-middle shadow-sm rounded overflow-hidden rounded-4">
-        <thead class="table-dark">
-            <tr>
-                <th class="text-center">Nom</th>
-                <th class="text-center">Domaine associé</th>
-                <th class="text-center">Description</th>
-                <th class="text-center">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="text-center align-middle">{{ rubrique.nom }}</td>
-                <td class="text-center align-middle">
-                    {% if rubrique.domaines is not empty %}
-                        {% for domaine in rubrique.domaines %}
-                            <span class="badge bg-light text-dark">{{ domaine.nom }}</span>
-                        {% endfor %}
-                    {% else %}
-                        —
-                    {% endif %}
-                </td>
-                <td class="text-center align-middle">{{ rubrique.description }}</td>
-                <td class="text-center align-middle" style="width: 180px;">
-                    <div class="d-flex flex-row justify-content-center align-items-center gap-1">
-                        <a class="btn btn-outline-warning w-100" href="{{ path('app_rubrique_edit', {'id': rubrique.id}) }}">Modifier</a>
-                        {{ include('rubrique/_delete_form.html.twig') }}
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover table-striped align-middle shadow-sm rounded overflow-hidden rounded-4">
+            <thead class="table-dark">
+                <tr>
+                    <th class="text-center">Nom</th>
+                    <th class="text-center">Domaine associé</th>
+                    <th class="text-center">Description</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center align-middle">{{ rubrique.nom }}</td>
+                    <td class="text-center align-middle">
+                        {% if rubrique.domaines is not empty %}
+                            {% for domaine in rubrique.domaines %}
+                                <span class="badge bg-light text-dark">{{ domaine.nom }}</span>
+                            {% endfor %}
+                        {% else %}
+                            —
+                        {% endif %}
+                    </td>
+                    <td class="text-center align-middle">{{ rubrique.description }}</td>
+                    <td class="text-center align-middle" style="width: 180px;">
+                        <div class="d-flex flex-row justify-content-center align-items-center gap-1">
+                            <a class="btn btn-outline-warning w-100" href="{{ path('app_rubrique_edit', {'id': rubrique.id}) }}">Modifier</a>
+                            {{ include('rubrique/_delete_form.html.twig') }}
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
