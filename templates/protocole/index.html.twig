@@ -48,7 +48,15 @@
                             —
                         {% endif %}
                     </td>
-                    <td class="text-center">{{ protocole.fichier ?: '—' }}</td>
+                    <td class="text-center">
+                        {% if protocole.fichier %}
+                            <a href="{{ vich_uploader_asset(protocole, 'pdfFile') }}" target="_blank" class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-file-pdf"></i> PDF
+                            </a>
+                        {% else %}
+                            <span class="text-muted">—</span>
+                        {% endif %}
+                    </td>
                     <td class="text-center">
                         <div class="d-flex flex-row justify-content-center align-items-center gap-1">
                             <a href="{{ path('app_protocole_show', {'id': protocole.id}) }}" class="btn btn-outline-primary">Voir</a>

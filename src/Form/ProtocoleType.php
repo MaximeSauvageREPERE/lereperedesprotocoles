@@ -8,6 +8,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class ProtocoleType extends AbstractType
 {
@@ -15,7 +16,13 @@ class ProtocoleType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('fichier')
+            ->add('pdfFile', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'download_uri' => true,
+                'label' => 'Fichier PDF',
+                'attr' => ['accept' => '.pdf']
+            ])
             ->add('theme', EntityType::class, [
                 'class' => Theme::class,
                 'choice_label' => 'nom',

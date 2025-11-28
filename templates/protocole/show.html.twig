@@ -28,7 +28,15 @@
                             —
                         {% endif %}
                     </td>
-                    <td class="text-center align-middle">{{ protocole.fichier ?: '—' }}</td>
+                    <td class="text-center align-middle">
+                        {% if protocole.fichier %}
+                            <a href="{{ vich_uploader_asset(protocole, 'pdfFile') }}" target="_blank" class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-file-pdf"></i> Télécharger PDF
+                            </a>
+                        {% else %}
+                            <span class="text-muted">Aucun fichier</span>
+                        {% endif %}
+                    </td>
                     <td class="text-center align-middle" style="width: 180px;">
                         <div class="d-flex flex-row justify-content-center align-items-center gap-1">
                             <a class="btn btn-outline-warning w-100" href="{{ path('app_protocole_edit', {'id': protocole.id}) }}">Modifier</a>
