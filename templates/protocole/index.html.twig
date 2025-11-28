@@ -9,42 +9,44 @@
         <a href="{{ path('app_protocole_new') }}" class="btn btn-success">Ajouter un protocole</a>
     </div>
 
-    <table class="table table-bordered table-hover table-striped align-middle shadow-sm rounded overflow-hidden rounded-4">
-        <thead class="table-dark">
-            <tr>
-                <th class="text-center">Nom</th>
-                <th class="text-center">Thème associé</th>
-                <th class="text-center">Fichier</th>
-                <th class="text-center">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for protocole in protocoles %}
-            <tr>
-                <td class="text-center">{{ protocole.nom }}</td>
-                <td class="text-center align-middle">
-                    {% if protocole.theme %}
-                        <span class="badge bg-light text-dark">{{ protocole.theme.nom }}</span>
-                    {% else %}
-                        —
-                    {% endif %}
-                </td>
-                <td class="text-center">{{ protocole.fichier ?: '—' }}</td>
-                <td class="text-center">
-                    <div class="d-flex flex-row justify-content-center align-items-center gap-1">
-                        <a href="{{ path('app_protocole_show', {'id': protocole.id}) }}" class="btn btn-outline-primary">Voir</a>
-                        <a href="{{ path('app_protocole_edit', {'id': protocole.id}) }}" class="btn btn-outline-warning">Modifier</a>
-                        {{ include('protocole/_delete_form.html.twig', { 'protocole': protocole }) }}
-                    </div>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4" class="text-center fst-italic">Aucun protocole trouvé</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover table-striped align-middle shadow-sm rounded overflow-hidden rounded-4">
+            <thead class="table-dark">
+                <tr>
+                    <th class="text-center">Nom</th>
+                    <th class="text-center">Thème associé</th>
+                    <th class="text-center">Fichier</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for protocole in protocoles %}
+                <tr>
+                    <td class="text-center">{{ protocole.nom }}</td>
+                    <td class="text-center align-middle">
+                        {% if protocole.theme %}
+                            <span class="badge bg-light text-dark">{{ protocole.theme.nom }}</span>
+                        {% else %}
+                            —
+                        {% endif %}
+                    </td>
+                    <td class="text-center">{{ protocole.fichier ?: '—' }}</td>
+                    <td class="text-center">
+                        <div class="d-flex flex-row justify-content-center align-items-center gap-1">
+                            <a href="{{ path('app_protocole_show', {'id': protocole.id}) }}" class="btn btn-outline-primary">Voir</a>
+                            <a href="{{ path('app_protocole_edit', {'id': protocole.id}) }}" class="btn btn-outline-warning">Modifier</a>
+                            {{ include('protocole/_delete_form.html.twig', { 'protocole': protocole }) }}
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4" class="text-center fst-italic">Aucun protocole trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
 
 {% endblock %}
