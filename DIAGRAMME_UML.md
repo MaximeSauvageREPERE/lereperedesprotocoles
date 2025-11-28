@@ -73,7 +73,7 @@ classDiagram
 
 ## Légende
 
-- **Relation ManyToMany** : Domaine ↔ Rubrique (une rubrique peut appartenir à plusieurs domaines)
+- **Relation ManyToMany** : Domaine ↔ Rubrique (une rubrique peut appartenir à plusieurs domaines et un domaine peut contenir plusieurs rubriques)
 - **Relation OneToMany** : Rubrique → Theme (une rubrique contient plusieurs thèmes)
 - **Relation OneToMany** : Theme → Protocole (un thème contient plusieurs protocoles)
 - **Héritage** : Admin hérite de Utilisateur (Single Table Inheritance)
