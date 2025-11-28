@@ -7,7 +7,20 @@
             {{ form_row(form.theme, {'attr': {'class': 'form-select'}}) }}
         </div>
         <div class="col-12">
-            {{ form_row(form.pdfFile) }}
+            <div class="card border-grey mb-3">
+                <div class="card-header text-black">
+                    <i class="bi bi-file-earmark-pdf"></i> Fichier PDF du protocole
+                </div>
+                <div class="card-body">
+                    {{ form_row(form.pdfFile, {
+                        'label': false,
+                        'attr': {'class': 'form-control'}
+                    }) }}
+                    <small class="form-text text-muted">
+                        <i class="bi bi-info-circle"></i> Formats acceptés : PDF uniquement. Taille maximale : 10 Mo
+                    </small>
+                </div>
+            </div>
         </div>
     </div>
     {{ form_rest(form) }}
