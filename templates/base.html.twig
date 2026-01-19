@@ -57,20 +57,26 @@
                         {# Récupère la route courante pour marquer le lien actif #}
                         {% set current_route = app.request.attributes.get('_route') %}
 
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link {% if current_route is defined and (current_route == 'app_domaine_index' or current_route starts with('app_domaine')) %}active{% endif %}" href="{{ path('app_domaine_index') }}" {% if current_route is defined and (current_route == 'app_domaine_index' or current_route starts with('app_domaine')) %}aria-current="page"{% endif %}>Domaines</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {% if current_route is defined and (current_route == 'app_rubrique_index' or current_route starts with('app_rubrique')) %}active{% endif %}" href="{{ path('app_rubrique_index') }}" {% if current_route is defined and (current_route == 'app_rubrique_index' or current_route starts with('app_rubrique')) %}aria-current="page"{% endif %}>Rubriques</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {% if current_route is defined and (current_route == 'app_theme_index' or current_route starts with('app_theme')) %}active{% endif %}" href="{{ path('app_theme_index') }}" {% if current_route is defined and (current_route == 'app_theme_index' or current_route starts with('app_theme')) %}aria-current="page"{% endif %}>Thèmes</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {% if current_route is defined and (current_route == 'app_protocole_index' or current_route starts with('app_protocole')) %}active{% endif %}" href="{{ path('app_protocole_index') }}" {% if current_route is defined and (current_route == 'app_protocole_index' or current_route starts with('app_protocole')) %}aria-current="page"{% endif %}>Protocoles</a>
-                            </li>
-                        </ul>
+                        {% if app.user %}
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li class="nav-item">
+                                    <a class="nav-link {% if current_route is defined and (current_route == 'app_domaine_index' or current_route starts with('app_domaine')) %}active{% endif %}" href="{{ path('app_domaine_index') }}" {% if current_route is defined and (current_route == 'app_domaine_index' or current_route starts with('app_domaine')) %}aria-current="page"{% endif %}>Domaines</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {% if current_route is defined and (current_route == 'app_rubrique_index' or current_route starts with('app_rubrique')) %}active{% endif %}" href="{{ path('app_rubrique_index') }}" {% if current_route is defined and (current_route == 'app_rubrique_index' or current_route starts with('app_rubrique')) %}aria-current="page"{% endif %}>Rubriques</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {% if current_route is defined and (current_route == 'app_theme_index' or current_route starts with('app_theme')) %}active{% endif %}" href="{{ path('app_theme_index') }}" {% if current_route is defined and (current_route == 'app_theme_index' or current_route starts with('app_theme')) %}aria-current="page"{% endif %}>Thèmes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {% if current_route is defined and (current_route == 'app_protocole_index' or current_route starts with('app_protocole')) %}active{% endif %}" href="{{ path('app_protocole_index') }}" {% if current_route is defined and (current_route == 'app_protocole_index' or current_route starts with('app_protocole')) %}aria-current="page"{% endif %}>Protocoles</a>
+                                </li>
+                            </ul>
+                        {% else %}
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            </ul>
+                        {% endif %}
+                        
                         <ul class="navbar-nav ms-auto">
                             {% if app.user %}
                                 <li class="nav-item d-flex align-items-center">
@@ -81,7 +87,7 @@
                                 </li>
                             {% else %}
                                 <li class="nav-item">
-                                    <a class="btn btn-outline-secondary ms-2" role="button" href="{{ path('app_login') }}">Connexion</a>
+                                    <a class="btn btn-outline-secondary ms-2" role="button" href="{{ path('app_login') }}">Se connecter</a>
                                 </li>
                             {% endif %}
                         </ul>

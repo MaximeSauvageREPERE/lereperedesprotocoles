@@ -185,6 +185,7 @@ class AppFixtures extends Fixture
         $admin->setEmail('admin.admin@hopital.fr');
         $hashedPasswordAdmin = $this->passwordHasher->hashPassword($admin, 'admin');
         $admin->setPassword($hashedPasswordAdmin);
+        $admin->setRoles(['ROLE_ADMIN']);
         $manager->persist($admin);
 
         // Enregistrement de toutes les entités
