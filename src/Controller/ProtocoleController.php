@@ -51,6 +51,9 @@ final class ProtocoleController extends AbstractController
                 'domaines' => $domaineRepository->findAll(),
                 'rubriques' => $rubriqueRepository->findAll(),
                 'themes' => $themeRepository->findAll(),
+                'selectedDomaine' => $domaineId,
+                'selectedRubrique' => $rubriqueId,
+                'selectedTheme' => $themeId,
             ]);
         }
         // Utilisateur : vue restreinte
