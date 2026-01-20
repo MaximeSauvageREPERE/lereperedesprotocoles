@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ protocole.nom }}{% endblock %}
+
+{% block body %}
+<div class="container mt-4 mb-5">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card shadow rounded-4 bg-light">
+                <div class="card-body p-4">
+                    <h1 class="card-title mb-3">{{ protocole.nom }}</h1>
+                    
+                    <div class="row">
+                        {% if protocole.theme and protocole.theme.rubrique %}
+                            <div class="col-md-6">
+                                <p class="card-text">
+                                    <strong>Rubrique :</strong> {{ protocole.theme.rubrique.nom }}
+                                </p>
+                            </div>
+                        {% endif %}
+                        
+                        {% if protocole.theme %}
+                            <div class="col-md-6">
+                                <p class="card-text">
+                                    <strong>Thème :</strong> {{ protocole.theme.nom }}
+                                </p>
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    {% if protocole.fichier %}
+                        <div class="mt-4">
+                            <a href="{{ vich_uploader_asset(protocole, 'pdfFile') }}" target="_blank" class="btn btn-lg btn-outline-primary">
+                                <i class="bi bi-file-pdf"></i> Télécharger le PDF
+                            </a>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-info mt-4">
+                            Aucun fichier disponible pour ce protocole.
+                        </div>
+                    {% endif %}
+                    
+                    <div class="mt-4">
+                        <a href="{{ path('app_protocole_index') }}" class="btn btn-secondary">Retour à la liste</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

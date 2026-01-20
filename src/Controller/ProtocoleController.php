@@ -93,7 +93,14 @@ final class ProtocoleController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function show(Protocole $protocole): Response
     {
-        return $this->render('protocole/show.html.twig', [
+        // Admin : vue complète
+        if ($this->isGranted('ROLE_ADMIN')) {
+            return $this->render('protocole/show.html.twig', [
+                'protocole' => $protocole,
+            ]);
+        }
+        // Utilisateur : vue restreinte
+        return $this->render('protocole/show_user.html.twig', [
             'protocole' => $protocole,
         ]);
     }
