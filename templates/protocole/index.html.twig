@@ -3,117 +3,120 @@
 {% block title %}Liste des Protocoles{% endblock %}
 
 {% block body %}
+<div class="container mt-4 mb-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-3 p-3">
+                <h1 class="mb-0">Liste des protocoles</h1>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('app_protocole_new') }}" class="btn btn-success">Ajouter un protocole</a>
+                {% endif %}
+            </div>
 
-    <div class="d-flex justify-content-between align-items-center mb-3 p-3">
-        <h1 class="mb-0">Liste des protocoles</h1>
-        {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('app_protocole_new') }}" class="btn btn-success">Ajouter un protocole</a>
-        {% endif %}
-    </div>
+            {# Filtres #}
+            <div class="card mb-4 shadow-sm bg-light rounded-4">
+                <div class="card-body">
+                    <form method="get" action="{{ path('app_protocole_index') }}" class="row g-3">
+                        <div class="col-md-4">
+                            <label for="domaine" class="form-label">Domaine</label>
+                            <select name="domaine" id="domaine" class="form-select">
+                                <option value="">Tous les domaines</option>
+                                {% for domaine in domaines %}
+                                    <option value="{{ domaine.id }}" {% if selectedDomaine == domaine.id %}selected{% endif %}>{{ domaine.nom }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="rubrique" class="form-label">Rubrique</label>
+                            <select name="rubrique" id="rubrique" class="form-select">
+                                <option value="">Toutes les rubriques</option>
+                                {% for rubrique in rubriques %}
+                                    <option value="{{ rubrique.id }}" {% if selectedRubrique == rubrique.id %}selected{% endif %}>{{ rubrique.nom }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="theme" class="form-label">Thème</label>
+                            <select name="theme" id="theme" class="form-select">
+                                <option value="">Tous les thèmes</option>
+                                {% for theme in themes %}
+                                    <option value="{{ theme.id }}" {% if selectedTheme == theme.id %}selected{% endif %}>{{ theme.nom }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Filtrer</button>
+                            <a href="{{ path('app_protocole_index') }}" class="btn btn-secondary">Réinitialiser</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
-    {# Filtres #}
-    <div class="card mb-4 shadow-sm bg-light rounded-4">
-        <div class="card-body">
-            <form method="get" action="{{ path('app_protocole_index') }}" class="row g-3">
-                <div class="col-md-4">
-                    <label for="domaine" class="form-label">Domaine</label>
-                    <select name="domaine" id="domaine" class="form-select">
-                        <option value="">Tous les domaines</option>
-                        {% for domaine in domaines %}
-                            <option value="{{ domaine.id }}" {% if selectedDomaine == domaine.id %}selected{% endif %}>{{ domaine.nom }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="col-md-4">
-                    <label for="rubrique" class="form-label">Rubrique</label>
-                    <select name="rubrique" id="rubrique" class="form-select">
-                        <option value="">Toutes les rubriques</option>
-                        {% for rubrique in rubriques %}
-                            <option value="{{ rubrique.id }}" {% if selectedRubrique == rubrique.id %}selected{% endif %}>{{ rubrique.nom }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="col-md-4">
-                    <label for="theme" class="form-label">Thème</label>
-                    <select name="theme" id="theme" class="form-select">
-                        <option value="">Tous les thèmes</option>
-                        {% for theme in themes %}
-                            <option value="{{ theme.id }}" {% if selectedTheme == theme.id %}selected{% endif %}>{{ theme.nom }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="col-12">
-                    <button type="submit" class="btn btn-primary">Filtrer</button>
-                    <a href="{{ path('app_protocole_index') }}" class="btn btn-secondary">Réinitialiser</a>
-                </div>
-            </form>
+            <div class="table-responsive mb-4">
+                <table class="table table-bordered table-hover table-striped align-middle shadow-sm rounded overflow-hidden rounded-4">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="text-center">Nom</th>
+                            <th class="text-center">Thème associé</th>
+                            <th class="text-center">Rubrique associé</th>
+                            <th class="text-center">Domaine associé</th>
+                            <th class="text-center">Fichier</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for protocole in protocoles %}
+                        <tr>
+                            <td class="text-center">{{ protocole.nom }}</td>
+                            <td class="text-center align-middle">
+                                {% if protocole.theme %}
+                                    <span class="badge bg-light text-dark">{{ protocole.theme.nom }}</span>
+                                {% else %}
+                                    —
+                                {% endif %}
+                            </td>
+                            <td class="text-center align-middle">
+                                {% if protocole.theme and protocole.theme.rubrique %}
+                                    <span class="badge bg-light text-dark">{{ protocole.theme.rubrique.nom }}</span>
+                                {% else %}
+                                    —
+                                {% endif %}
+                            </td>
+                            <td class="text-center align-middle">
+                                {% if protocole.theme and protocole.theme.rubrique and protocole.theme.rubrique.domaines is not empty %}
+                                    {% for domaine in protocole.theme.rubrique.domaines %}
+                                        <span class="badge bg-light text-dark">{{ domaine.nom }}</span>
+                                    {% endfor %}
+                                {% else %}
+                                    —
+                                {% endif %}
+                            </td>
+                            <td class="text-center">
+                                {% if protocole.fichier %}
+                                    <a href="{{ vich_uploader_asset(protocole, 'pdfFile') }}" target="_blank" class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-file-pdf"></i> PDF
+                                    </a>
+                                {% else %}
+                                    <span class="text-muted">Aucun fichier</span>
+                                {% endif %}
+                            </td>
+                            <td class="text-center">
+                                <div class="d-flex flex-row justify-content-center align-items-center gap-1">
+                                    <a href="{{ path('app_protocole_show', {'id': protocole.id}) }}" class="btn btn-outline-primary">Voir</a>
+                                    <a href="{{ path('app_protocole_edit', {'id': protocole.id}) }}" class="btn btn-outline-warning">Modifier</a>
+                                    {{ include('protocole/_delete_form.html.twig', { 'protocole': protocole }) }}
+                                </div>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6" class="text-center fst-italic">Aucun protocole trouvé</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-
-    <div class="table-responsive mb-4">
-        <table class="table table-bordered table-hover table-striped align-middle shadow-sm rounded overflow-hidden rounded-4">
-            <thead class="table-dark">
-                <tr>
-                    <th class="text-center">Nom</th>
-                    <th class="text-center">Thème associé</th>
-                    <th class="text-center">Rubrique associé</th>
-                    <th class="text-center">Domaine associé</th>
-                    <th class="text-center">Fichier</th>
-                    <th class="text-center">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for protocole in protocoles %}
-                <tr>
-                    <td class="text-center">{{ protocole.nom }}</td>
-                    <td class="text-center align-middle">
-                        {% if protocole.theme %}
-                            <span class="badge bg-light text-dark">{{ protocole.theme.nom }}</span>
-                        {% else %}
-                            —
-                        {% endif %}
-                    </td>
-                    <td class="text-center align-middle">
-                        {% if protocole.theme and protocole.theme.rubrique %}
-                            <span class="badge bg-light text-dark">{{ protocole.theme.rubrique.nom }}</span>
-                        {% else %}
-                            —
-                        {% endif %}
-                    </td>
-                    <td class="text-center align-middle">
-                        {% if protocole.theme and protocole.theme.rubrique and protocole.theme.rubrique.domaines is not empty %}
-                            {% for domaine in protocole.theme.rubrique.domaines %}
-                                <span class="badge bg-light text-dark">{{ domaine.nom }}</span>
-                            {% endfor %}
-                        {% else %}
-                            —
-                        {% endif %}
-                    </td>
-                    <td class="text-center">
-                        {% if protocole.fichier %}
-                            <a href="{{ vich_uploader_asset(protocole, 'pdfFile') }}" target="_blank" class="btn btn-sm btn-outline-primary">
-                                <i class="bi bi-file-pdf"></i> PDF
-                            </a>
-                        {% else %}
-                            <span class="text-muted">Aucun fichier</span>
-                        {% endif %}
-                    </td>
-                    <td class="text-center">
-                        <div class="d-flex flex-row justify-content-center align-items-center gap-1">
-                            <a href="{{ path('app_protocole_show', {'id': protocole.id}) }}" class="btn btn-outline-primary">Voir</a>
-                                <a href="{{ path('app_protocole_edit', {'id': protocole.id}) }}" class="btn btn-outline-warning">Modifier</a>
-                                {{ include('protocole/_delete_form.html.twig', { 'protocole': protocole }) }}
-                        </div>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="6" class="text-center fst-italic">Aucun protocole trouvé</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
-
-
+</div>
 {% endblock %}

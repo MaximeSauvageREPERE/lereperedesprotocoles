@@ -3,48 +3,54 @@
 {% block title %}Protocole{% endblock %}
 
 {% block body %}
-    <div class="d-flex justify-content-between align-items-center mb-3 rounded-4 p-3">
-        <h1 class="mb-0">Détail du protocole</h1>
-        <a href="{{ path('app_protocole_index') }}" class="btn btn-secondary">Retour à la liste</a>
-    </div>
+<div class="container mt-4 mb-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-3 p-3">
+                <h1 class="mb-0">Détail du protocole</h1>
+                <a href="{{ path('app_protocole_index') }}" class="btn btn-secondary">Retour à la liste</a>
+            </div>
 
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover table-striped align-middle shadow-sm rounded overflow-hidden rounded-4">
-            <thead class="table-dark">
-                <tr>
-                    <th class="text-center">Nom</th>
-                    <th class="text-center">Thème associé</th>
-                    <th class="text-center">Fichier</th>
-                    <th class="text-center">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="text-center align-middle">{{ protocole.nom }}</td>
-                    <td class="text-center align-middle">
-                        {% if protocole.theme %}
-                            <span class="badge bg-light text-dark">{{ protocole.theme.nom }}</span>
-                        {% else %}
-                            —
-                        {% endif %}
-                    </td>
-                    <td class="text-center align-middle">
-                        {% if protocole.fichier %}
-                            <a href="{{ vich_uploader_asset(protocole, 'pdfFile') }}" target="_blank" class="btn btn-sm btn-outline-primary">
-                                <i class="bi bi-file-pdf"></i> Télécharger PDF
-                            </a>
-                        {% else %}
-                            <span class="text-muted">Aucun fichier</span>
-                        {% endif %}
-                    </td>
-                    <td class="text-center align-middle" style="width: 180px;">
-                        <div class="d-flex flex-row justify-content-center align-items-center gap-1">
-                            <a class="btn btn-outline-warning w-100" href="{{ path('app_protocole_edit', {'id': protocole.id}) }}">Modifier</a>
-                            {{ include('protocole/_delete_form.html.twig') }}
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped align-middle shadow-sm rounded overflow-hidden rounded-4">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="text-center">Nom</th>
+                            <th class="text-center">Thème associé</th>
+                            <th class="text-center">Fichier</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center align-middle">{{ protocole.nom }}</td>
+                            <td class="text-center align-middle">
+                                {% if protocole.theme %}
+                                    <span class="badge bg-light text-dark">{{ protocole.theme.nom }}</span>
+                                {% else %}
+                                    —
+                                {% endif %}
+                            </td>
+                            <td class="text-center align-middle">
+                                {% if protocole.fichier %}
+                                    <a href="{{ vich_uploader_asset(protocole, 'pdfFile') }}" target="_blank" class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-file-pdf"></i> Télécharger PDF
+                                    </a>
+                                {% else %}
+                                    <span class="text-muted">Aucun fichier</span>
+                                {% endif %}
+                            </td>
+                            <td class="text-center align-middle" style="width: 180px;">
+                                <div class="d-flex flex-row justify-content-center align-items-center gap-1">
+                                    <a class="btn btn-outline-warning w-100" href="{{ path('app_protocole_edit', {'id': protocole.id}) }}">Modifier</a>
+                                    {{ include('protocole/_delete_form.html.twig') }}
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
+</div>
 {% endblock %}
