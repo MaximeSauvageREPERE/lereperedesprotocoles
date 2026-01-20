@@ -4,7 +4,51 @@
 
 {% block body %}
 <div class="container mt-4">
-    <h1 class="mb-4 text-center">Protocoles</h1>
+    <h1 class="mb-4 text-center">Liste des Protocoles</h1>
+    
+    {# Filtres #}
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <form method="get" action="{{ path('app_protocole_index') }}" class="row g-3">
+                <div class="col-md-4">
+                    <label for="domaine" class="form-label">Domaine</label>
+                    <select name="domaine" id="domaine" class="form-select">
+                        <option value="">Tous les domaines</option>
+                        {# Ajouter les options dynamiquement via le contrôleur #}
+                        {% for domaine in domaines %}
+                            <option value="{{ domaine.id }}" {% if selectedDomaine == domaine.id %}selected{% endif %}>{{ domaine.nom }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="rubrique" class="form-label">Rubrique</label>
+                    <select name="rubrique" id="rubrique" class="form-select">
+                        <option value="">Toutes les rubriques</option>
+                        {# Ajouter les options dynamiquement via le contrôleur #}
+                        {% for rubrique in rubriques %}
+                            <option value="{{ rubrique.id }}" {% if selectedRubrique == rubrique.id %}selected{% endif %}>{{ rubrique.nom }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="theme" class="form-label">Thème</label>
+                    <select name="theme" id="theme" class="form-select">
+                        <option value="">Tous les thèmes</option>
+                        {# Ajouter les options dynamiquement via le contrôleur #}
+                        {% for theme in themes %}
+                            <option value="{{ theme.id }}" {% if selectedTheme == theme.id %}selected{% endif %}>{{ theme.nom }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Filtrer</button>
+                    <a href="{{ path('app_protocole_index') }}" class="btn btn-secondary">Réinitialiser</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {# Cards des protocoles #}
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-4">
         {% for protocole in protocoles %}
             <div class="col">

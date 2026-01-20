@@ -11,25 +11,57 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use App\Repository\DomaineRepository;
+use App\Repository\RubriqueRepository;
+use App\Repository\ThemeRepository;
 
 #[Route('/protocole')]
 final class ProtocoleController extends AbstractController
 {
     #[Route(name: 'app_protocole_index', methods: ['GET'])]
     #[IsGranted('ROLE_USER')]
-    public function index(ProtocoleRepository $protocoleRepository): Response
+    public function index(Request $request, ProtocoleRepository $protocoleRepository, DomaineRepository $domaineRepository, RubriqueRepository $rubriqueRepository, ThemeRepository $themeRepository): Response
     {
-        $protocoles = $protocoleRepository->findAll();
+        $domaineId = $request->query->get('domaine');
+        $rubriqueId = $request->query->get('rubrique');
+        $themeId = $request->query->get('theme');
+
+        // Filtrer les protocoles selon les critères
+        $queryBuilder = $protocoleRepository->createQueryBuilder('p')
+            ->leftJoin('p.theme', 't')
+            ->leftJoin('t.rubrique', 'r')
+            ->leftJoin('r.domaines', 'd');
+
+        if ($themeId) {
+            $queryBuilder->andWhere('t.id = :themeId')->setParameter('themeId', $themeId);
+        }
+        if ($rubriqueId) {
+            $queryBuilder->andWhere('r.id = :rubriqueId')->setParameter('rubriqueId', $rubriqueId);
+        }
+        if ($domaineId) {
+            $queryBuilder->andWhere('d.id = :domaineId')->setParameter('domaineId', $domaineId);
+        }
+
+        $protocoles = $queryBuilder->getQuery()->getResult();
 
         // Admin : vue complète (CRUD)
         if ($this->isGranted('ROLE_ADMIN')) {
             return $this->render('protocole/index.html.twig', [
                 'protocoles' => $protocoles,
+                'domaines' => $domaineRepository->findAll(),
+                'rubriques' => $rubriqueRepository->findAll(),
+                'themes' => $themeRepository->findAll(),
             ]);
         }
-        // Utilisateur : vue limitée (lecture seule)
+        // Utilisateur : vue restreinte
         return $this->render('protocole/index_user.html.twig', [
             'protocoles' => $protocoles,
+            'domaines' => $domaineRepository->findAll(),
+            'rubriques' => $rubriqueRepository->findAll(),
+            'themes' => $themeRepository->findAll(),
+            'selectedDomaine' => $domaineId,
+            'selectedRubrique' => $rubriqueId,
+            'selectedTheme' => $themeId,
         ]);
     }
 
