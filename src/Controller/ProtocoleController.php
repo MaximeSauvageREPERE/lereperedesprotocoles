@@ -135,4 +135,15 @@ final class ProtocoleController extends AbstractController
 
         return $this->redirectToRoute('app_protocole_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/{id}/delete-pdf', name: 'app_protocole_delete_pdf', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
+    public function deletePdf(Protocole $protocole, EntityManagerInterface $em): Response
+    {
+        $protocole->setFichier(null);
+        $protocole->setPdfFile(null);
+        $em->flush();
+
+        return $this->json(['success' => true]);
+    }
 }
