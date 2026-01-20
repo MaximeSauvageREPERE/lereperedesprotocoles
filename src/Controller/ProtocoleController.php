@@ -109,10 +109,20 @@ final class ProtocoleController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
     public function edit(Request $request, Protocole $protocole, EntityManagerInterface $entityManager): Response
     {
+        $oldFichier = $protocole->getFichier();
+        
         $form = $this->createForm(ProtocoleType::class, $protocole);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Supprime l'ancien PDF si un nouveau est uploadé
+            if ($protocole->getPdfFile() && $oldFichier && $oldFichier !== $protocole->getFichier()) {
+                $oldFilePath = $this->getParameter('kernel.project_dir') . '/public/uploads/protocoles/' . $oldFichier;
+                if (file_exists($oldFilePath)) {
+                    unlink($oldFilePath);
+                }
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_protocole_index', [], Response::HTTP_SEE_OTHER);
@@ -124,11 +134,20 @@ final class ProtocoleController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_protocole_delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'app_protocole_delete', methods: ['POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function delete(Request $request, Protocole $protocole, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$protocole->getId(), $request->getPayload()->getString('_token'))) {
+            // Supprime le fichier PDF s'il existe
+            $fichier = $protocole->getFichier();
+            if ($fichier) {
+                $filePath = $this->getParameter('kernel.project_dir') . '/public/uploads/protocoles/' . $fichier;
+                if (file_exists($filePath)) {
+                    unlink($filePath);
+                }
+            }
+            
             $entityManager->remove($protocole);
             $entityManager->flush();
         }
@@ -140,6 +159,19 @@ final class ProtocoleController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
     public function deletePdf(Protocole $protocole, EntityManagerInterface $em): Response
     {
+        // Récupère le chemin du fichier avant de le supprimer de l'entité
+        $fichier = $protocole->getFichier();
+        
+        if ($fichier) {
+            $filePath = $this->getParameter('kernel.project_dir') . '/public/uploads/protocoles/' . $fichier;
+            
+            // Supprime le fichier physique s'il existe
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+        }
+        
+        // Supprime les références en base
         $protocole->setFichier(null);
         $protocole->setPdfFile(null);
         $em->flush();
