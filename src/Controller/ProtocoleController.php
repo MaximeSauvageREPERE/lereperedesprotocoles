@@ -19,8 +19,17 @@ final class ProtocoleController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function index(ProtocoleRepository $protocoleRepository): Response
     {
-        return $this->render('protocole/index.html.twig', [
-            'protocoles' => $protocoleRepository->findAll(),
+        $protocoles = $protocoleRepository->findAll();
+
+        // Admin : vue complète (CRUD)
+        if ($this->isGranted('ROLE_ADMIN')) {
+            return $this->render('protocole/index.html.twig', [
+                'protocoles' => $protocoles,
+            ]);
+        }
+        // Utilisateur : vue limitée (lecture seule)
+        return $this->render('protocole/index_user.html.twig', [
+            'protocoles' => $protocoles,
         ]);
     }
 

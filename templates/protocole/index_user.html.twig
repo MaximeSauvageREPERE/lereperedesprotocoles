@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Protocoles{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mb-4 text-center">Protocoles</h1>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-4">
+        {% for protocole in protocoles %}
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ protocole.nom }}</h5>
+                        {% if protocole.theme %}
+                            <p class="card-text"><span class="badge bg-primary">{{ protocole.theme.nom }}</span></p>
+                        {% endif %}
+                        {% if protocole.theme and protocole.theme.rubrique %}
+                            <p class="card-text"><small class="text-muted">{{ protocole.theme.rubrique.nom }}</small></p>
+                        {% endif %}
+                    </div>
+                    <div class="card-footer bg-white border-0 d-flex justify-content-between">
+                        <a href="{{ path('app_protocole_show', {'id': protocole.id}) }}" class="btn btn-sm btn-outline-primary">Voir</a>
+                        {% if protocole.fichier %}
+                            <a href="{{ vich_uploader_asset(protocole, 'pdfFile') }}" target="_blank" class="btn btn-sm btn-outline-secondary">PDF</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-12">
+                <p class="text-center text-muted fst-italic">Aucun protocole disponible.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
