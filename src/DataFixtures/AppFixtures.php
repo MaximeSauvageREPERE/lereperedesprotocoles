@@ -123,49 +123,49 @@ class AppFixtures extends Fixture
         $protocoleRCIU = new Protocole();
         $protocoleRCIU->setNom('Protocole retard de croissance intra-utérin');
         $protocoleRCIU->setTheme($themeRCIU);
-        $protocoleRCIU->setFichier('protocole_retard_croissance_intra_uterin.pdf');
+        $protocoleRCIU->setFichier(null);
         $manager->persist($protocoleRCIU);
 
         $protocoleMIN = new Protocole();
         $protocoleMIN->setNom('Protocole Mort Innatendu du Nourrisson');
         $protocoleMIN->setTheme($themeMIN);
-        $protocoleMIN->setFichier('protocole_mort_innatendu_nourrisson.pdf');
+        $protocoleMIN->setFichier(null);
         $manager->persist($protocoleMIN);
 
         $protocoleViolences = new Protocole();
         $protocoleViolences->setNom('Protocole dépistage des violences');
         $protocoleViolences->setTheme($themeViolences);
-        $protocoleViolences->setFichier('protocole_dépistage_violences.pdf');
+        $protocoleViolences->setFichier(null);
         $manager->persist($protocoleViolences);
 
         $protocoleTabac = new Protocole();
         $protocoleTabac->setNom('Protocole prise en charge du tabac chez la femme enceinte');
         $protocoleTabac->setTheme($themeTabac);
-        $protocoleTabac->setFichier('protocole_tabac_femme_enceinte.pdf');
+        $protocoleTabac->setFichier(null);
         $manager->persist($protocoleTabac);
 
         $protocoleVaccination = new Protocole();
         $protocoleVaccination->setNom('Protocole vaccination et grosssesse');
         $protocoleVaccination->setTheme($themeVaccination);
-        $protocoleVaccination->setFichier('protocole_vaccination.pdf');
+        $protocoleVaccination->setFichier(null);
         $manager->persist($protocoleVaccination);
 
         $protocoleDiabete = new Protocole();
         $protocoleDiabete->setNom('Protocole dépistage du diabète gestationnel');
         $protocoleDiabete->setTheme($themeDiabete);
-        $protocoleDiabete->setFichier('protocole_diabete_gestationnel.pdf');
+        $protocoleDiabete->setFichier(null);
         $manager->persist($protocoleDiabete);
 
         $protocoleT21 = new Protocole();
         $protocoleT21->setNom('Protocole dépistage de la Trisomie 21');
         $protocoleT21->setTheme($themeT21);
-        $protocoleT21->setFichier('protocole_trisomie_21.pdf');
+        $protocoleT21->setFichier(null);
         $manager->persist($protocoleT21);
 
         $protocolePE = new Protocole();
         $protocolePE->setNom('Protocole prééclampsie');
         $protocolePE->setTheme($themePE);
-        $protocolePE->setFichier('protocole_pre_eclampsie.pdf');
+        $protocolePE->setFichier(null);
         $manager->persist($protocolePE);
 
         // Création d'un Utilisateur standard

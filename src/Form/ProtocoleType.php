@@ -18,7 +18,7 @@ class ProtocoleType extends AbstractType
             ->add('nom')
             ->add('pdfFile', VichFileType::class, [
                 'required' => false,
-                'allow_delete' => false,
+                'allow_delete' => true,
                 'download_uri' => false,
                 'label' => 'Fichier PDF',
                 'attr' => ['accept' => '.pdf']
