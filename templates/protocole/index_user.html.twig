@@ -55,11 +55,11 @@
                 <div class="card h-100 shadow-sm rounded-4 bg-light">
                     <div class="card-body">
                         <h5 class="card-title">{{ protocole.nom }}</h5>
-                        {% if protocole.theme %}
-                            <p class="card-text"><span class="badge bg-black">Thème : {{ protocole.theme.nom }}</span></p>
-                        {% endif %}
                         {% if protocole.theme and protocole.theme.rubrique %}
-                            <p class="card-text"><small class="text-muted">{{ protocole.theme.rubrique.nom }}</small></p>
+                            <p class="card-text"><span class="badge bg-black">Rubrique : {{ protocole.theme.rubrique.nom }}</span></p>
+                        {% endif %}
+                        {% if protocole.theme %}
+                            <p class="card-text"><small class="text-muted">Thème : {{ protocole.theme.nom }}</small></p>
                         {% endif %}
                     </div>
                     <div class="card-footer bg-light border-0 d-flex justify-content-between rounded-4">
