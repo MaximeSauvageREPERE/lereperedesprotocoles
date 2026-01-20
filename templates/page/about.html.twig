@@ -2,83 +2,13 @@
 
 {% block title %}Qui sommes nous ?{% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <style>
-        .about-title {
-            color: #6b2c4f;
-            font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
-        }
-
-        .about-card {
-            background: linear-gradient(135deg, rgba(235, 195, 210, 0.95) 0%, rgba(220, 180, 200, 0.95) 100%);
-            backdrop-filter: blur(10px);
-            border: none;
-            box-shadow: 0 6px 15px rgba(107, 44, 79, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .about-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(107, 44, 79, 0.3);
-        }
-
-        .about-card .card-body {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 1rem;
-        }
-
-        .about-card h2 {
-            color: #6b2c4f;
-            font-weight: 600;
-        }
-
-        .about-card .lead {
-            color: #5a2342;
-            line-height: 1.8;
-        }
-
-        .about-card p, .about-card li span {
-            color: #5a2342;
-            line-height: 1.8;
-        }
-
-        .mission-bullet {
-            width: 10px;
-            height: 10px;
-            background: linear-gradient(135deg, #6b2c4f 0%, #8a3a5f 100%);
-            border-radius: 50%;
-            display: inline-block;
-            flex-shrink: 0;
-            margin-top: 0.5em;
-            box-shadow: 0 2px 4px rgba(107, 44, 79, 0.3);
-        }
-
-        .objective-bullet {
-            width: 10px;
-            height: 10px;
-            background: linear-gradient(135deg, #5a2342 0%, #6b2c4f 100%);
-            border-radius: 50%;
-            display: inline-block;
-            flex-shrink: 0;
-            margin-top: 0.5em;
-            box-shadow: 0 2px 4px rgba(90, 35, 66, 0.3);
-        }
-
-        .about-card i {
-            color: #6b2c4f;
-        }
-    </style>
-{% endblock %}
-
 {% block body %}
 <div class="container mt-4 mb-5">
-    <h1 class="mb-5 text-center about-title">Qui sommes nous ?</h1>
+    <h1 class="mb-5 text-center">Qui sommes nous ?</h1>
     
     <div class="row">
         <div class="col-md-10 mx-auto">
-            <div class="card about-card shadow-lg rounded-4 mb-4">
+            <div class="card shadow rounded-4 mb-4 bg-light">
                 <div class="card-body p-4">
                     <p class="lead">
                         Bienvenue sur <strong>Le Repère des Protocoles</strong>, une application créée par le <strong>Réseau Périnatal Réunion</strong> afin de faciliter l'accès aux protocoles périnataux. 
@@ -92,53 +22,53 @@
                 </div>
             </div>
 
-            <div class="card about-card shadow-lg rounded-4 mb-4">
+            <div class="card shadow rounded-4 mb-4 bg-light">
                 <div class="card-body p-4">
-                    <h2 class="mb-4">Nos missions</h2>
+                    <h2 class="mb-4"><i class="bi bi-bullseye text-primary"></i> Nos missions</h2>
                     <ul class="list-unstyled">
                         <li class="mb-3 d-flex align-items-start">
-                            <span class="me-3 mission-bullet"></span>
+                            <span class="me-3" style="width: 8px; height: 8px; background-color: #198754; border-radius: 50%; display: inline-block; flex-shrink: 0; margin-top: 0.5em;"></span>
                             <span>Contribuer à la mise en œuvre de la politique nationale et régionale en santé périnatale et apporter son expertise à l'ARS</span>
                         </li>
                         <li class="mb-3 d-flex align-items-start">
-                            <span class="me-3 mission-bullet"></span>
+                            <span class="me-3" style="width: 8px; height: 8px; background-color: #198754; border-radius: 50%; display: inline-block; flex-shrink: 0; margin-top: 0.5em;"></span>
                             <span>Aider et accompagner les acteurs de l'offre de soins en périnatalité</span>
                         </li>
                         <li class="mb-3 d-flex align-items-start">
-                            <span class="me-3 mission-bullet"></span>
+                            <span class="me-3" style="width: 8px; height: 8px; background-color: #198754; border-radius: 50%; display: inline-block; flex-shrink: 0; margin-top: 0.5em;"></span>
                             <span>Améliorer la coordination ville-établissements de santé</span>
                         </li>
                         <li class="mb-3 d-flex align-items-start">
-                            <span class="me-3 mission-bullet"></span>
+                            <span class="me-3" style="width: 8px; height: 8px; background-color: #198754; border-radius: 50%; display: inline-block; flex-shrink: 0; margin-top: 0.5em;"></span>
                             <span>Améliorer l'accès à l'IVG</span>
                         </li>
                         <li class="mb-3 d-flex align-items-start">
-                            <span class="me-3 mission-bullet"></span>
+                            <span class="me-3" style="width: 8px; height: 8px; background-color: #198754; border-radius: 50%; display: inline-block; flex-shrink: 0; margin-top: 0.5em;"></span>
                             <span>Contribuer à réduire les inégalités sociales de santé</span>
                         </li>
                     </ul>
                 </div>
             </div>
 
-            <div class="card about-card shadow-lg rounded-4">
+            <div class="card shadow rounded-4 bg-light">
                 <div class="card-body p-4">
-                    <h2 class="mb-4">Nos objectifs</h2>
+                    <h2 class="mb-4"><i class="bi bi-flag-fill text-primary"></i> Nos objectifs</h2>
                     <ul class="list-unstyled">
                         <li class="mb-3 d-flex align-items-start">
-                            <span class="me-3 objective-bullet"></span>
+                            <span class="me-3" style="width: 8px; height: 8px; background-color: #0d6ff0; border-radius: 50%; display: inline-block; flex-shrink: 0; margin-top: 0.5em;"></span>
                             <span>Harmoniser et optimiser la prise en charge des femmes enceintes, du couple et de leur enfant</span>
                         </li>
                         <li class="mb-3 d-flex align-items-start">
-                            <span class="me-3 objective-bullet"></span>
+                            <span class="me-3" style="width: 8px; height: 8px; background-color: #0d6ff0; border-radius: 50%; display: inline-block; flex-shrink: 0; margin-top: 0.5em;"></span>
                             <span>Participer à l'amélioration constante des indicateurs réunionnais de la périnatalité</span>
                         </li>
                         <li class="mb-3 d-flex align-items-start">
-                            <span class="me-3 objective-bullet"></span>
+                            <span class="me-3" style="width: 8px; height: 8px; background-color: #0d6ff0; border-radius: 50%; display: inline-block; flex-shrink: 0; margin-top: 0.5em;"></span>
                             <span>Assurer une cohérence et une synergie renforcées des interventions dans le champ périnatal et promouvoir 
                             la sécurité des soins et la qualité de la prise en charge pour chaque femme et chaque nourrisson sur le territoire</span>
                         </li>
                         <li class="mb-3 d-flex align-items-start">
-                            <span class="me-3 objective-bullet"></span>
+                            <span class="me-3" style="width: 8px; height: 8px; background-color: #0d6ff0; border-radius: 50%; display: inline-block; flex-shrink: 0; margin-top: 0.5em;"></span>
                             <span>Faire travailler ensemble des professionnels pluridisciplinaires, issus de modes d'exercices divers et 
                             les établissements liés à la périnatalité : de vrais réseaux villes/hôpital adaptés au parcours de soin en périnatalité</span>
                         </li>
