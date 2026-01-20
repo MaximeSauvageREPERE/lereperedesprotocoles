@@ -2,33 +2,95 @@
 
 {% block title %}Se connecter{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .login-card {
+            background: linear-gradient(135deg, rgba(235, 195, 210, 0.95) 0%, rgba(220, 180, 200, 0.95) 100%);
+            backdrop-filter: blur(10px);
+            border: none;
+            box-shadow: 0 8px 20px rgba(107, 44, 79, 0.2);
+        }
+
+        .login-card .card-body {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 1rem;
+        }
+
+        .login-title {
+            color: #6b2c4f;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
+        }
+
+        .login-label {
+            color: #5a2342;
+            font-weight: 500;
+        }
+
+        .login-input {
+            border: 2px solid rgba(107, 44, 79, 0.2);
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .login-input:focus {
+            border-color: #6b2c4f;
+            box-shadow: 0 0 0 0.25rem rgba(107, 44, 79, 0.15);
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, #6b2c4f 0%, #8a3a5f 100%);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(107, 44, 79, 0.4);
+            background: linear-gradient(135deg, #5a2342 0%, #6b2c4f 100%);
+            color: white;
+        }
+
+        .alert-danger {
+            background-color: rgba(220, 53, 69, 0.15);
+            border-color: #dc3545;
+            color: #842029;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
 <div class="container mt-5 mb-5">
     <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow rounded-4">
-                <div class="card-body p-4 bg-light rounded-4">
+        <div class="col-md-6 col-lg-5">
+            <div class="card login-card shadow-lg rounded-4">
+                <div class="card-body p-5">
                     <form method="post">
                         {% if error %}
-                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                            <div class="alert alert-danger mb-4">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                         {% endif %}
 
                         {% if app.user %}
                             <div class="mb-3">
-                                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                                Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}" class="text-decoration-none" style="color: #6b2c4f;">Se déconnecter</a>
                             </div>
                         {% endif %}
 
-                        <h1 class="h3 mb-3 font-weight-normal text-center">Veuillez vous connecter</h1>
+                        <h1 class="h3 mb-4 login-title text-center">Veuillez vous connecter</h1>
                         
-                        <div class="mb-3">
-                            <label for="username" class="form-label">Email</label>
-                            <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
+                        <div class="mb-4">
+                            <label for="username" class="form-label login-label">Email</label>
+                            <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control login-input" autocomplete="email" required autofocus>
                         </div>
                         
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Mot de passe</label>
-                            <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
+                        <div class="mb-4">
+                            <label for="password" class="form-label login-label">Mot de passe</label>
+                            <input type="password" name="_password" id="password" class="form-control login-input" autocomplete="current-password" required>
                         </div>
                         
                         <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
@@ -43,9 +105,9 @@
                             </div>
                         #}
 
-                        <div class="d-grid">
-                            <button class="btn btn-lg btn-outline-secondary" type="submit">
-                                Se connnecter
+                        <div class="d-grid mt-4">
+                            <button class="btn btn-lg btn-login" type="submit">
+                                Se connecter
                             </button>
                         </div>
                     </form>
