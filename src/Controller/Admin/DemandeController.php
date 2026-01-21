@@ -26,7 +26,7 @@ class DemandeController extends AbstractController
         ]);
     }
 
-    #[Route('/accepter/{id}', name: 'admin_demande_accepter')]
+     #[Route('/accepter/{id}', name: 'admin_demande_accepter')]
     public function accepter(
         DemandeInscription $demande,
         EntityManagerInterface $em,
@@ -43,16 +43,15 @@ class DemandeController extends AbstractController
         $user->setEmail($demande->getEmail());
         $user->setRoles(['ROLE_USER']);
 
-        // Générer un mot de passe provisoire ou stocker un champ "plainPassword" dans la demande si vous l’avez
-        $passwordTemp = bin2hex(random_bytes(6));
-        $user->setPassword($hasher->hashPassword($user, $passwordTemp));
+        // Utiliser le mot de passe fourni dans la demande
+        $user->setPassword($hasher->hashPassword($user, $demande->getMotDePasse()));
 
         $demande->setStatus('accepted');
 
         $em->persist($user);
         $em->flush();
 
-        $this->addFlash('success', "Demande acceptée. Mot de passe provisoire : $passwordTemp");
+        $this->addFlash('success', "Demande acceptée. L'utilisateur peut se connecter avec son mot de passe.");
         return $this->redirectToRoute('admin_demandes');
     }
 

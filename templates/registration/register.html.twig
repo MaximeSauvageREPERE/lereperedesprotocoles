@@ -80,11 +80,17 @@
                         {{ form_errors(registrationForm.email) }}
                     </div>
 
-                    {# <div class="mb-3 form-check">
-                        {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
-                        {{ form_label(registrationForm.agreeTerms, null, {'label_attr': {'class': 'form-check-label'}}) }}
-                        {{ form_errors(registrationForm.agreeTerms) }}
-                    </div> #}
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.motDePasse.first, null, {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(registrationForm.motDePasse.first, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(registrationForm.motDePasse.first) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.motDePasse.second, null, {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(registrationForm.motDePasse.second, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(registrationForm.motDePasse.second) }}
+                    </div>
 
                     <div class="d-grid">
                         <button class="btn btn-lg btn-outline-secondary" type="submit">S'enregistrer</button>

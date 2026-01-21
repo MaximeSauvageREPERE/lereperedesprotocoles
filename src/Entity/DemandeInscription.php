@@ -20,6 +20,9 @@ class DemandeInscription
     #[ORM\Column(length: 180)]
     private string $email;
 
+    #[ORM\Column(length: 255)]
+    private string $motDePasse;
+
     #[ORM\Column(length: 20)]
     private string $status = 'pending'; // pending|accepted|refused
 
@@ -66,6 +69,17 @@ class DemandeInscription
     public function setEmail(string $email): self
     {
         $this->email = $email;
+        return $this;
+    }
+
+    public function getMotDePasse(): string
+{
+    return $this->motDePasse;
+}
+
+    public function setMotDePasse(string $motDePasse): self
+    {
+        $this->motDePasse = $motDePasse;
         return $this;
     }
 
