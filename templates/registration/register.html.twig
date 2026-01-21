@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+{% block title %}S'enregistrer{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .register-wrapper {
+            min-height: calc(100vh - 200px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+        .register-card { width: 100%; max-width: 480px; }
+        .register-card .form-control:focus {
+            border-color: rgba(200, 150, 180, 0.8);
+            box-shadow: 0 0 0 0.2rem rgba(200, 150, 180, 0.25);
+            outline: none;
+        }
+        .register-card .btn-outline-secondary {
+            border: 2px solid rgba(200, 150, 180, 0.8);
+            color: #5a3a5a;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .register-card .btn-outline-secondary:hover {
+            background-color: rgba(200, 150, 180, 0.8);
+            border-color: rgba(200, 150, 180, 0.8);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(200, 150, 180, 0.3);
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<div class="register-wrapper">
+    <div class="register-card">
+        <div class="card shadow rounded-4">
+            <div class="card-body p-4 bg-light rounded-4">
+                <h1 class="h4 mb-4 text-center">Créer un compte</h1>
+
+                {{ form_start(registrationForm) }}
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.email, null, {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(registrationForm.email) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.plainPassword.first, null, {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(registrationForm.plainPassword.first, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(registrationForm.plainPassword.first) }}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.plainPassword.second, null, {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(registrationForm.plainPassword.second, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(registrationForm.plainPassword.second) }}
+                    </div>
+
+                    <div class="mb-3 form-check">
+                        {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+                        {{ form_label(registrationForm.agreeTerms, null, {'label_attr': {'class': 'form-check-label'}}) }}
+                        {{ form_errors(registrationForm.agreeTerms) }}
+                    </div>
+
+                    <div class="d-grid">
+                        <button class="btn btn-lg btn-outline-secondary" type="submit">S'enregistrer</button>
+                    </div>
+                {{ form_end(registrationForm) }}
+
+                <div class="text-center mt-3">
+                    <a href="{{ path('app_login') }}">Déjà un compte ? Se connecter</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
