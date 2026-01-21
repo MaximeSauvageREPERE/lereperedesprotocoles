@@ -170,9 +170,9 @@ class AppFixtures extends Fixture
 
         // Création d'un Utilisateur standard
         $utilisateur = new Utilisateur();
-        $utilisateur->setNom('GAUCHER');
-        $utilisateur->setPrenom('Catherine');
-        $utilisateur->setEmail('user.user@hopital.fr');
+        $utilisateur->setNom('UTILISATEUR');
+        $utilisateur->setPrenom('Utilisateur');
+        $utilisateur->setEmail('user.user@user.fr');
         $hashedPassword = $this->passwordHasher->hashPassword($utilisateur, 'user');
         $utilisateur->setPassword($hashedPassword);
         $utilisateur->setRoles(['ROLE_USER']);
@@ -180,9 +180,9 @@ class AppFixtures extends Fixture
 
         // Création d'un Admin
         $admin = new Admin();
-        $admin->setNom('SAUVAGE');
-        $admin->setPrenom('Maxime');
-        $admin->setEmail('admin.admin@hopital.fr');
+        $admin->setNom('ADMINISTRATEUR');
+        $admin->setPrenom('Administrateur');
+        $admin->setEmail('admin.admin@admin.fr');
         $hashedPasswordAdmin = $this->passwordHasher->hashPassword($admin, 'admin');
         $admin->setPassword($hashedPasswordAdmin);
         $admin->setRoles(['ROLE_ADMIN']);
