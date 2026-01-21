@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block title %}Modifier Utilisateur{% endblock %}
+
+{% block body %}
+    <h1>Modifier Utilisateur</h1>
+
+    {{ include('Admin/utilisateur/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+    <a href="{{ path('admin_utilisateur_index') }}" class="btn btn-secondary mt-3">Retour</a>
+{% endblock %}
