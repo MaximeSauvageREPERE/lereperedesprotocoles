@@ -30,6 +30,27 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(200, 150, 180, 0.3);
         }
+
+        .text-center a {
+            color: rgba(200, 150, 180, 0.8);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .text-center a:hover { color: #5a3a5a; }
+
+        .text-center a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: rgba(200, 150, 180, 0.8);
+            transition: width 0.3s ease;
+        }
+        .text-center a:hover::after { width: 100%; }
     </style>
 {% endblock %}
 
@@ -59,11 +80,11 @@
                         {{ form_errors(registrationForm.plainPassword.second) }}
                     </div>
 
-                    <div class="mb-3 form-check">
+                    {# <div class="mb-3 form-check">
                         {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
                         {{ form_label(registrationForm.agreeTerms, null, {'label_attr': {'class': 'form-check-label'}}) }}
                         {{ form_errors(registrationForm.agreeTerms) }}
-                    </div>
+                    </div> #}
 
                     <div class="d-grid">
                         <button class="btn btn-lg btn-outline-secondary" type="submit">S'enregistrer</button>
