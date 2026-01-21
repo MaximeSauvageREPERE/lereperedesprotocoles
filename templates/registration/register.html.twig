@@ -59,9 +59,21 @@
     <div class="register-card">
         <div class="card shadow rounded-4">
             <div class="card-body p-4 bg-light rounded-4">
-                <h1 class="h4 mb-4 text-center">Créer un compte</h1>
+                <h1 class="h4 mb-4 text-center">Envoyer une demande</h1>
 
                 {{ form_start(registrationForm) }}
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.nom, null, {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(registrationForm.nom, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(registrationForm.nom) }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        {{ form_label(registrationForm.prenom, null, {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(registrationForm.prenom, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(registrationForm.prenom) }}
+                    </div>
+                    
                     <div class="mb-3">
                         {{ form_label(registrationForm.email, null, {'label_attr': {'class': 'form-label'}}) }}
                         {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
