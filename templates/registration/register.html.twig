@@ -80,18 +80,6 @@
                         {{ form_errors(registrationForm.email) }}
                     </div>
 
-                    <div class="mb-3">
-                        {{ form_label(registrationForm.plainPassword.first, null, {'label_attr': {'class': 'form-label'}}) }}
-                        {{ form_widget(registrationForm.plainPassword.first, {'attr': {'class': 'form-control'}}) }}
-                        {{ form_errors(registrationForm.plainPassword.first) }}
-                    </div>
-
-                    <div class="mb-3">
-                        {{ form_label(registrationForm.plainPassword.second, null, {'label_attr': {'class': 'form-label'}}) }}
-                        {{ form_widget(registrationForm.plainPassword.second, {'attr': {'class': 'form-control'}}) }}
-                        {{ form_errors(registrationForm.plainPassword.second) }}
-                    </div>
-
                     {# <div class="mb-3 form-check">
                         {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
                         {{ form_label(registrationForm.agreeTerms, null, {'label_attr': {'class': 'form-check-label'}}) }}

@@ -109,6 +109,9 @@
                                     <li class="nav-item">
                                         <a class="nav-link {% if current_route is defined and (current_route == 'app_theme_index' or current_route starts with('app_theme')) %}active{% endif %}" href="{{ path('app_theme_index') }}">Thèmes</a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link {% if current_route is defined and (current_route == 'admin_demandes' or current_route starts with('admin_demande')) %}active{% endif %}" href="{{ path('admin_demandes') }}">Demandes</a>
+                                    </li>
                                 {% endif %}
                                 <li class="nav-item">
                                     <a class="nav-link {% if current_route is defined and (current_route == 'app_protocole_index' or current_route starts with('app_protocole')) %}active{% endif %}" href="{{ path('app_protocole_index') }}">Protocoles</a>
