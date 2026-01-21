@@ -2,7 +2,7 @@
 {% block title %}Utilisateurs{% endblock %}
 
 {% block body %}
-
+<div class="container">
     <div class="d-flex justify-content-between align-items-center mb-3 p-3">
         <h1 class="mb-0">Utilisateurs</h1>
         <a href="{{ path('admin_utilisateur_new') }}" class="btn btn-success">Ajouter un utilisateur</a>
@@ -38,7 +38,6 @@
                     </td>
                     <td class="text-center">
                         <div class="d-flex flex-row justify-content-center align-items-center gap-1">
-                            <a href="{{ path('admin_utilisateur_show', {'id': u.id}) }}" class="btn btn-outline-primary btn-sm">Voir</a>
                             <a href="{{ path('admin_utilisateur_edit', {'id': u.id}) }}" class="btn btn-outline-warning btn-sm">Modifier</a>
                             <form method="post" action="{{ path('admin_utilisateur_delete', {'id': u.id}) }}" style="display:inline;" onsubmit="return confirm('Êtes-vous sûr ?');">
                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ u.id) }}">
@@ -55,5 +54,5 @@
             </tbody>
         </table>
     </div>
-
+</div>
 {% endblock %}
