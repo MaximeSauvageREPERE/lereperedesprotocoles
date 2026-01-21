@@ -4,83 +4,83 @@
 
 {% block stylesheets %}
     {{ parent() }}
-        <style>
-            .login-wrapper {
-                min-height: calc(100vh - 200px);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding: 1rem;
-            }
-            .login-card {
-                width: 100%;
-                max-width: 420px;
-            }
+    <style>
+        .login-wrapper {
+            min-height: calc(100vh - 200px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+        .login-card {
+            width: 100%;
+            max-width: 420px;
+        }
 
-            .login-wrapper .form-control:hover,
-            .login-wrapper input:hover,
-            .login-wrapper textarea:hover,
-            .login-wrapper select:hover {
-                cursor: pointer;
-            }
+        .login-card .form-control:hover,
+        .login-card input:hover,
+        .login-card textarea:hover,
+        .login-card select:hover {
+            cursor: pointer;
+        }
 
-            .text-center a:hover {
-                    color: #5a3a5a;
-                }
-            
-            .text-center a {
-                color: rgba(200, 150, 180, 0.8);
-                text-decoration: none;
-                font-weight: 600;
-                transition: all 0.3s ease;
-                position: relative;
-            }
+        .login-card .form-control:focus {
+            border-color: rgba(200, 150, 180, 0.8);
+            box-shadow: 0 0 0 0.2rem rgba(200, 150, 180, 0.25);
+            outline: none;
+        }
 
-            .text-center a::after {
-                content: '';
-                position: absolute;
-                bottom: -3px;
-                left: 0;
-                width: 0;
-                height: 2px;
-                background-color: rgba(200, 150, 180, 0.8);
-                transition: width 0.3s ease;
-            }
+        .login-card .btn-outline-secondary {
+            border: 2px solid rgba(200, 150, 180, 0.8);
+            color: #5a3a5a;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
 
-            .text-center a:hover::after {
-                width: 100%;
-            }
+        .login-card .btn-outline-secondary:hover {
+            background-color: rgba(200, 150, 180, 0.8);
+            border-color: rgba(200, 150, 180, 0.8);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(200, 150, 180, 0.3);
+        }
 
-            .login-wrapper .btn-outline-secondary {
-                border: 2px solid rgba(200, 150, 180, 0.8);
-                color: #5a3a5a;
-                font-weight: 600;
-                transition: all 0.3s ease;
-            }
+        .login-card .btn-outline-secondary:active {
+            transform: translateY(0);
+        }
 
-            .login-wrapper .btn-outline-secondary:hover {
-                background-color: rgba(200, 150, 180, 0.8);
-                border-color: rgba(200, 150, 180, 0.8);
-                color: white;
-                transform: translateY(-2px);
-                box-shadow: 0 4px 12px rgba(200, 150, 180, 0.3);
-            }
+        .text-center a {
+            color: rgba(200, 150, 180, 0.8);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
 
-            .login-wrapper .btn-outline-secondary:active {
-                transform: translateY(0);
-            }
+        .text-center a:hover {
+            color: #5a3a5a;
+        }
 
-            .login-wrapper .form-control:focus {
-                border-color: rgba(200, 150, 180, 0.8);
-                box-shadow: 0 0 0 0.2rem rgba(200, 150, 180, 0.25);
-                outline: none;
-            }
-        </style>
+        .text-center a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: rgba(200, 150, 180, 0.8);
+            transition: width 0.3s ease;
+        }
+
+        .text-center a:hover::after {
+            width: 100%;
+        }
+    </style>
 {% endblock %}
 
 {% block body %}
 <div class="login-wrapper">
-    <div class="col-md-4">
+    <div class="login-card">
         <div class="card shadow rounded-4">
             <div class="card-body p-4 bg-light rounded-4">
                 <form method="post">
@@ -114,7 +114,7 @@
                         </button>
                     </div>
                     <div class="text-center mt-3">
-                        <p class="mb-0">Vous n'avez pas encore de compte ? <a href="{{ path('app_register') }}">Soumettre une demande</a></p>
+                        <p class="mb-0">Pas encore de compte ? <a href="{{ path('app_register') }}">Soumettre une demande</a></p>
                     </div>
                 </form>
             </div>
