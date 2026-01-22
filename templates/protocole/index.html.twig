@@ -51,7 +51,6 @@
             box-shadow: 0 0 0 0.2rem rgba(90, 58, 90, 0.40);
         }
 
-        /* Boutons Filtrer / Réinitialiser */
         .btn-outline-primary,
         .btn-outline-secondary {
             border: 2px solid rgba(200, 150, 180, 0.8);
@@ -60,7 +59,6 @@
             font-weight: 600;
             transition: all 0.3s ease;
         }
-
         .btn-outline-primary:hover,
         .btn-outline-secondary:hover {
             background-color: rgba(90, 58, 90, 0.8);
@@ -71,7 +69,14 @@
         }
 
         .btn-outline-primary:active,
-        .btn-outline-secondary:active {
+        .btn-outline-primary:focus,
+        .btn-outline-primary:focus-visible,
+        .btn-outline-secondary:active,
+        .btn-outline-secondary:focus,
+        .btn-outline-secondary:focus-visible {
+            background-color: rgba(90, 58, 90, 0.8) !important;
+            border-color: rgba(200, 150, 180, 0.8) !important;
+            color: #fff !important;
             transform: translateY(0);
         }
 
@@ -120,7 +125,6 @@
             border: 1px solid rgba(90, 58, 90, 0.3);
         }
 
-        /* Boutons d'action dans le tableau */
         .table .btn-outline-primary,
         .table .btn-outline-warning {
             border: 2px solid rgba(200, 150, 180, 0.8);
