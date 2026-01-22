@@ -47,6 +47,23 @@ classDiagram
         +setFichier()
     }
     
+    class DemandeInscription {
+        +int id
+        +string nom
+        +string prenom
+        +string email
+        +string password
+        +datetime dateCreation
+        +string statut
+        +string token
+        +datetime dateExpiration
+        +text motifRejet
+        +getUtilisateur()
+        +setUtilisateur()
+        +isValide()
+        +isExpire()
+    }
+    
     class Utilisateur {
         +int id
         +string nom
@@ -55,6 +72,8 @@ classDiagram
         +string password
         +array roles
         +string type
+        +datetime dateInscription
+        +boolean actif
         +getUserIdentifier()
         +getRoles()
         +eraseCredentials()
@@ -67,43 +86,41 @@ classDiagram
     Domaine "1..*" -- "*" Rubrique : contient
     Rubrique "1" -- "*" Theme : contient
     Theme "1" -- "*" Protocole : contient
+    DemandeInscription "1" -- "0..1" Utilisateur : crée
     Utilisateur <|-- Admin : hérite
 
 ```
 
 ## Légende
 
-- **Relation ManyToMany** : Domaine ↔ Rubrique (une rubrique peut appartenir à plusieurs domaines et un domaine peut contenir plusieurs rubriques)
-- **Relation OneToMany** : Rubrique → Theme (une rubrique contient plusieurs thèmes)
-- **Relation OneToMany** : Theme → Protocole (un thème contient plusieurs protocoles)
+- **Relation ManyToMany** : Domaine ↔ Rubrique
+- **Relation OneToMany** : Rubrique → Theme
+- **Relation OneToMany** : Theme → Protocole
+- **Relation OneToOne** : DemandeInscription → Utilisateur
 - **Héritage** : Admin hérite de Utilisateur (Single Table Inheritance)
-
-## Hiérarchie
-
-```
-Domaine (1..*) → Rubrique (*) → Theme (1) → Protocole (*)
-                     ↓
-                   Thème (1)
-                     ↓
-                 Protocole (*)
-```
 
 ## Description des relations
 
-### Domaine ↔ Rubrique (ManyToMany)
-- Un domaine peut contenir plusieurs rubriques
-- Une rubrique peut appartenir à plusieurs domaines
-- Table de liaison : `rubrique_domaine`
+### DemandeInscription → Utilisateur (OneToOne optionnelle)
+- Une demande d'inscription crée **zéro ou un** Utilisateur
+- Un utilisateur est créé à partir d'**une seule** DemandeInscription
+- Statuts possibles : `en_attente`, `approuvee`, `rejetee`
+- Après approbation, un Utilisateur est créé avec le rôle `ROLE_USER`
 
-### Rubrique → Theme (OneToMany)
-- Une rubrique contient plusieurs thèmes
-- Un thème appartient à une seule rubrique
+### Workflow d'enregistrement
 
-### Theme → Protocole (OneToMany)
-- Un thème contient plusieurs protocoles
-- Un protocole appartient à un seul thème
+1. **Créer DemandeInscription** : L'utilisateur soumet son formulaire d'inscription
+   - Token généré pour la vérification d'email
+   - Statut initial : `en_attente`
+   - Date d'expiration : 24-48h
 
-### Utilisateur → Admin (Héritage)
-- Admin hérite de toutes les propriétés de Utilisateur
+3. **Acceptée/Refusée** : L'admin traite la demande
+   - **Acceptée** : Créer un Utilisateur avec les données de DemandeInscription
+   - **Refusée** : Stocker le motif de rejet, statut = `rejetee`
+
+4. **Activer Utilisateur** : Une fois approuvé, l'utilisateur peut se connecter
+
+### Utilisateur (propriétés complètes)
+- Héritage : Admin hérite de Utilisateur (Single Table Inheritance)
 - Stockage dans une seule table avec un discriminator `type`
 - Admin possède automatiquement le rôle `ROLE_ADMIN`
