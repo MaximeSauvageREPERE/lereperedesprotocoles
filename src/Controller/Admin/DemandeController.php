@@ -6,8 +6,10 @@ use App\Entity\DemandeInscription;
 use App\Entity\Utilisateur;
 use App\Repository\DemandeInscriptionRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
@@ -18,9 +20,18 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class DemandeController extends AbstractController
 {
     #[Route('/', name: 'admin_demandes')]
-    public function index(DemandeInscriptionRepository $repo): Response
+    public function index(DemandeInscriptionRepository $repo, PaginatorInterface $paginator, Request $request): Response
     {
-        $demandes = $repo->findBy([], ['createdAt' => 'DESC']);
+        $query = $repo->createQueryBuilder('d')
+            ->orderBy('d.createdAt', 'DESC')
+            ->getQuery();
+        
+        $demandes = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            9 // Nombre d'éléments par page
+        );
+
         return $this->render('admin/demandes/index.html.twig', [
             'demandes' => $demandes,
         ]);
