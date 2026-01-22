@@ -8,7 +8,7 @@
         .btn-success {
             border: 2px solid rgba(200, 150, 180, 0.8);
             color: #5a3a5a;
-            background-color: rgba(235, 195, 210, 0.35);
+            background-color: #f5e6f0;
             font-weight: 600;
             transition: all 0.3s ease;
         }
@@ -51,58 +51,101 @@
             border: 1px solid rgba(90, 58, 90, 0.3);
         }
         
+        .table .badge.bg-light {
+            background-color: #ebc3d2cc !important;
+            color: #5a3a5a !important;
+            border: 1px solid rgba(90, 58, 90, 0.3);
+        }
+        .pagination { gap: .35rem; }
+        .pagination .page-link {
+            padding: .55rem 1.05rem;
+            font-size: 0.95rem;
+            color: #5a3a5a;
+            background-color: #ebc3d2cc;
+            border: 1px solid rgb(90, 58, 90, 0.7);
+            box-shadow: 0 2px 6px rgba(90, 58, 90, 0.7);
+            transition: all .15s ease;
+            border-radius: 999px;
+        }
+
+        .pagination .page-item:first-child .page-link,
+        .pagination .page-item:last-child .page-link {
+            border-radius: 999px;
+        }
+        .pagination .page-link:hover {
+            background-color: #5a3a5a;
+            color: #fff;
+            border-color: #495057;
+        }
+        .pagination .page-item.active .page-link {
+            background-color: #5a3a5a;
+            border-color: rgb(90, 58, 90);
+            color: #ffffff;
+            box-shadow: 0 3px 10px rgba(90, 58, 90, 0.7);
+        }
+        
+        .pagination .page-item.disabled .page-link {
+            color: rgb(133, 136, 139, 0.7);
+            background-color: #ebc3d2cc;
+            border-color: rgb(90, 58, 90, 0.4);
+            box-shadow: none;
+        }
     </style>
 {% endblock %}
 
 {% block body %}
-<div class="container mt-4 mb-5">
-    <div class="row">
-        <div class="col-12">
-            <div class="d-flex justify-content-between align-items-center mb-3 p-3">
-                <h1 class="mb-0">Liste des rubriques</h1>
-                <a href="{{ path('app_rubrique_new') }}" class="btn btn-success">Ajouter une rubrique</a>
-            </div>
+    <div class="container mt-4 mb-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center mb-3 p-3">
+                    <h1 class="mb-0">Liste des rubriques</h1>
+                    <a href="{{ path('app_rubrique_new') }}" class="btn btn-success">Ajouter une rubrique</a>
+                </div>
 
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped align-middle shadow-sm rounded overflow-hidden rounded-4">
-                    <thead class="table-dark">
-                        <tr>
-                            <th class="text-center">Nom</th>
-                            <th class="text-center">Domaine associé</th>
-                            <th class="text-center">Description</th>
-                            <th class="text-center">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {% for rubrique in rubriques %}
-                        <tr>
-                            <td class="text-center">{{ rubrique.nom }}</td>
-                            <td class="text-center align-middle">
-                                {% if rubrique.domaines is not empty %}
-                                    {% for domaine in rubrique.domaines %}
-                                        <span class="badge bg-light text-dark">{{ domaine.nom }}</span>
-                                    {% endfor %}
-                                {% else %}
-                                    —
-                                {% endif %}
-                            </td>
-                            <td class="text-center">{{ rubrique.description }}</td>
-                            <td class="text-center">
-                                <div class="d-flex flex-row justify-content-center align-items-center gap-1">
-                                    <a href="{{ path('app_rubrique_edit', {'id': rubrique.id}) }}" class="btn btn-outline-warning">Modifier</a>
-                                    {{ include('rubrique/_delete_form.html.twig', { 'rubrique': rubrique }) }}
-                                </div>
-                            </td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <td colspan="4" class="text-center fst-italic">Aucune rubrique trouvée</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-striped align-middle shadow-sm rounded overflow-hidden rounded-4">
+                        <thead class="table-dark">
+                            <tr>
+                                <th class="text-center">Nom</th>
+                                <th class="text-center">Domaine associé</th>
+                                <th class="text-center">Description</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for rubrique in rubriques %}
+                            <tr>
+                                <td class="text-center">{{ rubrique.nom }}</td>
+                                <td class="text-center align-middle">
+                                    {% if rubrique.domaines is not empty %}
+                                        {% for domaine in rubrique.domaines %}
+                                            <span class="badge bg-light text-dark">{{ domaine.nom }}</span>
+                                        {% endfor %}
+                                    {% else %}
+                                        —
+                                    {% endif %}
+                                </td>
+                                <td class="text-center">{{ rubrique.description }}</td>
+                                <td class="text-center">
+                                    <div class="d-flex flex-row justify-content-center align-items-center gap-1">
+                                        <a href="{{ path('app_rubrique_edit', {'id': rubrique.id}) }}" class="btn btn-outline-warning">Modifier</a>
+                                        {{ include('rubrique/_delete_form.html.twig', { 'rubrique': rubrique }) }}
+                                    </div>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="4" class="text-center fst-italic">Aucune rubrique trouvée</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <nav aria-label="Page navigation" class="d-flex justify-content-center mb-4">
+    {{ knp_pagination_render(rubriques, 'pagination/bootstrap_v5_pagination_fr.html.twig') }}
+    </nav>
+
 {% endblock %}

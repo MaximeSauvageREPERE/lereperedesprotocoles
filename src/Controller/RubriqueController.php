@@ -11,16 +11,26 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Knp\Component\Pager\PaginatorInterface;
 
 #[Route('/rubrique')]
 #[IsGranted('ROLE_ADMIN')]
 final class RubriqueController extends AbstractController
 {
     #[Route(name: 'app_rubrique_index', methods: ['GET'])]
-    public function index(RubriqueRepository $rubriqueRepository): Response
+    public function index(RubriqueRepository $rubriqueRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        $query = $rubriqueRepository->createQueryBuilder('t')
+            ->getQuery();
+        
+        $rubriques = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            9
+        );
+
         return $this->render('rubrique/index.html.twig', [
-            'rubriques' => $rubriqueRepository->findAll(),
+            'rubriques' => $rubriques,
         ]);
     }
 
