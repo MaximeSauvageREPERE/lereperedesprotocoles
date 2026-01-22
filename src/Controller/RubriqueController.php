@@ -44,14 +44,6 @@ final class RubriqueController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_rubrique_show', methods: ['GET'])]
-    public function show(Rubrique $rubrique): Response
-    {
-        return $this->render('rubrique/show.html.twig', [
-            'rubrique' => $rubrique,
-        ]);
-    }
-
     #[Route('/{id}/edit', name: 'app_rubrique_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Rubrique $rubrique, EntityManagerInterface $entityManager): Response
     {
