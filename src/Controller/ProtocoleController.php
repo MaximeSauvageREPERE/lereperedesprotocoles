@@ -14,17 +14,19 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 use App\Repository\DomaineRepository;
 use App\Repository\RubriqueRepository;
 use App\Repository\ThemeRepository;
+use Knp\Component\Pager\PaginatorInterface;
 
 #[Route('/protocole')]
 final class ProtocoleController extends AbstractController
 {
     #[Route(name: 'app_protocole_index', methods: ['GET'])]
     #[IsGranted('ROLE_USER')]
-    public function index(Request $request, ProtocoleRepository $protocoleRepository, DomaineRepository $domaineRepository, RubriqueRepository $rubriqueRepository, ThemeRepository $themeRepository): Response
+    public function index(Request $request, ProtocoleRepository $protocoleRepository, DomaineRepository $domaineRepository, RubriqueRepository $rubriqueRepository, ThemeRepository $themeRepository, PaginatorInterface $paginator): Response
     {
         $domaineId = $request->query->get('domaine');
         $rubriqueId = $request->query->get('rubrique');
         $themeId = $request->query->get('theme');
+        $page = $request->query->getInt('page', 1);
 
         // Filtrer les protocoles selon les critères
         $queryBuilder = $protocoleRepository->createQueryBuilder('p')
@@ -42,7 +44,11 @@ final class ProtocoleController extends AbstractController
             $queryBuilder->andWhere('d.id = :domaineId')->setParameter('domaineId', $domaineId);
         }
 
-        $protocoles = $queryBuilder->getQuery()->getResult();
+        $protocoles = $paginator->paginate(
+            $queryBuilder->getQuery(),
+            $page,
+            9
+        );
 
         // Admin : vue complète (CRUD)
         if ($this->isGranted('ROLE_ADMIN')) {

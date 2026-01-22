@@ -119,6 +119,26 @@ class AppFixtures extends Fixture
         $themePE->setRubrique($rubriqueAccouchement);
         $manager->persist($themePE);
 
+        $themeVomissements = new Theme();
+        $themeVomissements->setNom('Vomissements gravidiques');
+        $themeVomissements->setRubrique($rubriqueAntenatal);
+        $manager->persist($themeVomissements);
+
+        $themeCancerCol = new Theme();
+        $themeCancerCol->setNom('Prévention du Cancer du col de l\'utérus');
+        $themeCancerCol->setRubrique($rubriqueAntenatal);
+        $manager->persist($themeCancerCol);
+
+        $themeChlamydiae = new Theme();
+        $themeChlamydiae->setNom('Prévention du Cancer du col de l\'utérus');
+        $themeChlamydiae->setRubrique($rubriqueIST);
+        $manager->persist($themeChlamydiae);
+
+        $themePlantesGrossesse = new Theme();
+        $themePlantesGrossesse->setNom('Plantes et grossesse');
+        $themePlantesGrossesse->setRubrique($rubriqueAntenatal);
+        $manager->persist($themePlantesGrossesse);
+
         // Création des Protocoles
         $protocoleRCIU = new Protocole();
         $protocoleRCIU->setNom('Protocole retard de croissance intra-utérin');
@@ -167,6 +187,30 @@ class AppFixtures extends Fixture
         $protocolePE->setTheme($themePE);
         $protocolePE->setFichier(null);
         $manager->persist($protocolePE);
+
+        $protocoleVomissements = new Protocole();
+        $protocoleVomissements->setNom('Protocole vomissements gravidiques');
+        $protocoleVomissements->setTheme($themeVomissements);
+        $protocoleVomissements->setFichier(null);
+        $manager->persist($protocoleVomissements);
+
+        $protocoleCancerCol = new Protocole();
+        $protocoleCancerCol->setNom('Protocole de prévention du Cancer du col de l\'utérus');
+        $protocoleCancerCol->setTheme($themeCancerCol);
+        $protocoleCancerCol->setFichier(null);
+        $manager->persist($protocoleCancerCol);
+
+        $protocoleChlamydiae = new Protocole();
+        $protocoleChlamydiae->setNom('Protocole de dépistage des Chlamydiae Trachomatis');
+        $protocoleChlamydiae->setTheme($themeChlamydiae);
+        $protocoleChlamydiae->setFichier(null);
+        $manager->persist($protocoleChlamydiae);
+
+        $protocolePlantesGrossesse = new Protocole();
+        $protocolePlantesGrossesse->setNom('Protocole plantes et grossesse');
+        $protocolePlantesGrossesse->setTheme($themePlantesGrossesse);
+        $protocolePlantesGrossesse->setFichier(null);
+        $manager->persist($protocolePlantesGrossesse);
 
         // Création d'un Utilisateur standard
         $utilisateur = new Utilisateur();
