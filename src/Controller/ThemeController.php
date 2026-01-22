@@ -11,16 +11,26 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Knp\Component\Pager\PaginatorInterface;
 
 #[Route('/theme')]
 #[IsGranted('ROLE_ADMIN')]
 final class ThemeController extends AbstractController
 {
     #[Route(name: 'app_theme_index', methods: ['GET'])]
-    public function index(ThemeRepository $themeRepository): Response
+    public function index(ThemeRepository $themeRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        $query = $themeRepository->createQueryBuilder('t')
+            ->getQuery();
+        
+        $themes = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            10 // Nombre d'éléments par page
+        );
+
         return $this->render('theme/index.html.twig', [
-            'themes' => $themeRepository->findAll(),
+            'themes' => $themes,
         ]);
     }
 

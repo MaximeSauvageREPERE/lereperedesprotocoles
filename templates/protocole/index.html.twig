@@ -51,16 +51,16 @@
             box-shadow: 0 0 0 0.2rem rgba(90, 58, 90, 0.40);
         }
 
-        .btn-outline-primary,
-        .btn-outline-secondary {
+        .btn-outline-primary-filtre,
+        .btn-outline-secondary-filtre {
             border: 2px solid rgba(200, 150, 180, 0.8);
             color: #5a3a5a;
-            background-color: transparent;
+            background-color: #f5e6f0;
             font-weight: 600;
             transition: all 0.3s ease;
         }
-        .btn-outline-primary:hover,
-        .btn-outline-secondary:hover {
+        .btn-outline-primary-filtre:hover,
+        .btn-outline-secondary-filtre:hover {
             background-color: rgba(90, 58, 90, 0.8);
             border-color: rgba(200, 150, 180, 0.8);
             color: #fff;
@@ -68,12 +68,12 @@
             box-shadow: 0 4px 12px rgba(200, 150, 180, 0.3);
         }
 
-        .btn-outline-primary:active,
-        .btn-outline-primary:focus,
-        .btn-outline-primary:focus-visible,
-        .btn-outline-secondary:active,
-        .btn-outline-secondary:focus,
-        .btn-outline-secondary:focus-visible {
+        .btn-outline-primary-filtre:active,
+        .btn-outline-primary-filtre:focus,
+        .btn-outline-primary-filtre:focus-visible,
+        .btn-outline-secondary-filtre:active,
+        .btn-outline-secondary-filtre:focus,
+        .btn-outline-secondary-filtre:focus-visible {
             background-color: rgba(90, 58, 90, 0.8) !important;
             border-color: rgba(200, 150, 180, 0.8) !important;
             color: #fff !important;
@@ -83,7 +83,7 @@
         .btn-success {
             border: 2px solid rgba(200, 150, 180, 0.8);
             color: #5a3a5a;
-            background-color: rgba(235, 195, 210, 0.35);
+            background-color: #f5e6f0;
             font-weight: 600;
             transition: all 0.3s ease;
         }
@@ -188,8 +188,8 @@
                     </select>
                 </div>
                 <div class="col-12 d-flex justify-content-end gap-2">
-                    <button type="submit" class="btn btn-outline-primary">Filtrer</button>
-                    <a href="{{ path('app_protocole_index') }}" class="btn btn-outline-secondary">Réinitialiser</a>
+                    <button type="submit" class="btn btn-outline-primary-filtre">Filtrer</button>
+                    <a href="{{ path('app_protocole_index') }}" class="btn btn-outline-secondary-filtre">Réinitialiser</a>
                 </div>
             </form>
         </div>
