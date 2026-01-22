@@ -1,5 +1,64 @@
 {% extends 'base.html.twig' %}
+
 {% block title %}Demandes d'inscription{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .btn-success {
+            border: 2px solid rgba(200, 150, 180, 0.8);
+            color: #5a3a5a;
+            background-color: transparent;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-success:hover {
+            background-color: rgba(90, 58, 90, 0.8);
+            border-color: rgba(200, 150, 180, 0.8);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(200, 150, 180, 0.3);
+        }
+        .btn-success:active,
+        .btn-success:focus,
+        .btn-success:focus-visible {
+            background-color: rgba(90, 58, 90, 0.8) !important;
+            border-color: rgba(200, 150, 180, 0.8) !important;
+            color: #fff !important;
+            transform: translateY(0);
+        }
+        
+        .table .btn-outline-danger,
+        .table .btn-outline-success {
+            border: 2px solid rgba(200, 150, 180, 0.8);
+            color: #5a3a5a;
+            background-color: transparent;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .table .btn-outline-danger:hover,
+        .table .btn-outline-success:hover {
+            background-color: rgba(90, 58, 90, 0.8);
+            border-color: rgba(200, 150, 180, 0.8);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(200, 150, 180, 0.3);
+        }
+
+        .table {
+            background-color: #f5e6f0;
+            border: 1px solid rgba(90, 58, 90, 0.3);
+        }
+
+        .table .badge {
+            background-color: #ebc3d2cc !important;
+            color: #5a3a5a !important;
+            border: 1px solid rgba(90, 58, 90, 0.3);
+        }
+        
+    </style>
+{% endblock %}
 
 {% block body %}
 <div class="container mt-4">
