@@ -2,13 +2,23 @@
 
 {% block title %}Qui sommes nous ?{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .card-rose {
+            background-color: rgba(235, 195, 210, 0.9) !important;
+            border: 1px solid rgba(90, 58, 90, 0.3);
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
 <div class="container mt-4 mb-5">
     <h1 class="mb-5 text-center">Qui sommes nous ?</h1>
     
     <div class="row">
         <div class="col-md-10 mx-auto">
-            <div class="card shadow rounded-4 mb-4 bg-light">
+            <div class="card shadow rounded-4 mb-4 card-rose">
                 <div class="card-body p-4">
                     <p class="lead">
                         Bienvenue sur <strong>Le Repère des Protocoles</strong>, une application créée par le <strong>Réseau Périnatal Réunion</strong> afin de faciliter l'accès aux protocoles périnataux. 
@@ -22,7 +32,7 @@
                 </div>
             </div>
 
-            <div class="card shadow rounded-4 mb-4 bg-light">
+            <div class="card shadow rounded-4 mb-4 card-rose">
                 <div class="card-body p-4">
                     <h2 class="mb-4"><i class="bi bi-bullseye text-primary"></i> Nos missions</h2>
                     <ul class="list-unstyled">
@@ -50,7 +60,7 @@
                 </div>
             </div>
 
-            <div class="card shadow rounded-4 bg-light">
+            <div class="card shadow rounded-4 card-rose">
                 <div class="card-body p-4">
                     <h2 class="mb-4"><i class="bi bi-flag-fill text-primary"></i> Nos objectifs</h2>
                     <ul class="list-unstyled">
