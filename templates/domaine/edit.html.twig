@@ -2,24 +2,96 @@
 
 {% block title %}Modifier Domaine{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        /* Card rose pour le formulaire */
+        .card-rose {
+            background-color: rgba(235, 195, 210, 0.9) !important;
+            border: 1px solid rgba(90, 58, 90, 0.7);
+        }
+        .card-rose .card-footer {
+            background-color: rgba(235, 195, 210, 0.9) !important;
+            border-top: 1px solid rgba(90, 58, 90, 0.3);
+        }
+
+        /* Boutons personnalisés */
+        .btn-custom-primary {
+            border: 2px solid rgba(200, 150, 180, 0.8);
+            color: #fff;
+            background-color: rgba(90, 58, 90, 0.9);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-custom-primary:hover {
+            background-color: rgba(90, 58, 90, 1);
+            border-color: rgba(200, 150, 180, 0.8);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(200, 150, 180, 0.3);
+        }
+
+        .btn-custom-secondary {
+            border: 2px solid rgba(200, 150, 180, 0.8);
+            color: #5a3a5a;
+            background-color: rgba(245, 230, 240, 0.85);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-custom-secondary:hover {
+            background-color: rgba(90, 58, 90, 0.8);
+            border-color: rgba(200, 150, 180, 0.8);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(200, 150, 180, 0.3);
+        }
+
+        /* Titre */
+        h1 {
+            color: #5a3a5a;
+            font-weight: 600;
+        }
+
+        /* Inputs du formulaire */
+        .form-control, .form-select {
+            background-color: #f5e6f0 !important;
+            border: 1px solid #d9b3d4 !important;
+            color: #5a3a5a;
+        }
+        .form-control:focus, .form-select:focus {
+            background-color: #f5e6f0 !important;
+            border-color: #5a3a5a !important;
+            box-shadow: 0 0 0 0.2rem rgba(90, 58, 90, 0.40);
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
-<div class="container mt-4 mb-5">
-    <div class="row">
-        <div class="col-12">
-            <div class="d-flex justify-content-between align-items-center mb-3 p-3">
-                <h1 class="mb-0">Modifier un domaine</h1>
-                <a href="{{ path('app_domaine_index') }}" class="btn btn-secondary">Retour à la liste</a>
-            </div>
-            <div class="card shadow-sm mb-4 bg-light rounded-4">
-                <div class="card-body">
-                    {{ include('domaine/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+    <div class="container mt-4 mb-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h1 class="mb-0">Modifier un domaine</h1>
+                    <a href="{{ path('app_domaine_index') }}" class="btn btn-custom-secondary">
+                        <i class="bi bi-arrow-left"></i> Retour à la liste
+                    </a>
                 </div>
-                <div class="card-footer d-flex justify-content-end gap-2 bg-light rounded-4 border-0">
-                    <button type="submit" form="domaine_form" class="btn btn-outline-primary">Mettre à jour</button>
-                    {{ include('domaine/_delete_form.html.twig') }}
+                <div class="card card-rose shadow-sm mb-4 rounded-4">
+                    <div class="card-body p-4">
+                        {{ include('domaine/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+                    </div>
+                    <div class="card-footer d-flex justify-content-end gap-2 rounded-bottom-4 py-3">
+                        <div class="d-flex gap-2">
+                            <a href="{{ path('app_domaine_index') }}" class="btn btn-custom-secondary">
+                                <i class="bi bi-x-lg"></i> Annuler
+                            </a>
+                            <button type="submit" form="domaine_form" class="btn btn-custom-primary">
+                                <i class="bi bi-check-lg"></i> Mettre à jour
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
