@@ -2,59 +2,63 @@
 {% block title %}Demandes d'inscription{% endblock %}
 
 {% block body %}
-
+<div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3 p-3">
         <h1 class="mb-0">Demandes d'inscription</h1>
     </div>
 
-    <div class="table-responsive mb-4">
-        <table class="table table-bordered table-hover table-striped align-middle shadow-sm rounded overflow-hidden rounded-4">
-            <thead class="table-dark">
-                <tr>
-                    <th class="text-center">ID</th>
-                    <th class="text-center">Nom</th>
-                    <th class="text-center">Prénom</th>
-                    <th class="text-center">Email</th>
-                    <th class="text-center">Statut</th>
-                    <th class="text-center">Créée le</th>
-                    <th class="text-center">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for d in demandes %}
-                <tr>
-                    <td class="text-center">{{ d.id }}</td>
-                    <td class="text-center">{{ d.nom }}</td>
-                    <td class="text-center">{{ d.prenom }}</td>
-                    <td class="text-center">{{ d.email }}</td>
-                    <td class="text-center">
-                        {% if d.status == 'pending' %}
-                            <span class="badge bg-warning text-dark">En attente</span>
-                        {% elseif d.status == 'accepted' %}
-                            <span class="badge bg-success">Acceptée</span>
-                        {% else %}
-                            <span class="badge bg-danger">Refusée</span>
-                        {% endif %}
-                    </td>
-                    <td class="text-center text-nowrap">{{ d.createdAt|date('d/m/Y H:i') }}</td>
-                    <td class="text-center">
-                        <div class="d-flex flex-row justify-content-center align-items-center gap-1">
-                            {% if d.status == 'pending' %}
-                                <a href="{{ path('admin_demande_accepter', {'id': d.id}) }}" class="btn btn-outline-success btn-sm">Valider</a>
-                                <a href="{{ path('admin_demande_refuser', {'id': d.id}) }}" class="btn btn-outline-danger btn-sm">Refuser</a>
-                            {% else %}
-                                <span class="text-muted">—</span>
-                            {% endif %}
-                        </div>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="7" class="text-center fst-italic">Aucune demande trouvée</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive mb-4">
+                <table class="table table-bordered table-hover table-striped align-middle shadow-sm rounded overflow-hidden rounded-4">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">Nom</th>
+                            <th class="text-center">Prénom</th>
+                            <th class="text-center">Email</th>
+                            <th class="text-center">Statut</th>
+                            <th class="text-center">Créée le</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for d in demandes %}
+                        <tr>
+                            <td class="text-center">{{ d.id }}</td>
+                            <td class="text-center">{{ d.nom }}</td>
+                            <td class="text-center">{{ d.prenom }}</td>
+                            <td class="text-center">{{ d.email }}</td>
+                            <td class="text-center">
+                                {% if d.status == 'pending' %}
+                                    <span class="badge bg-warning text-dark">En attente</span>
+                                {% elseif d.status == 'accepted' %}
+                                    <span class="badge bg-success">Acceptée</span>
+                                {% else %}
+                                    <span class="badge bg-danger">Refusée</span>
+                                {% endif %}
+                            </td>
+                            <td class="text-center text-nowrap">{{ d.createdAt|date('d/m/Y H:i') }}</td>
+                            <td class="text-center">
+                                <div class="d-flex flex-row justify-content-center align-items-center gap-1">
+                                    {% if d.status == 'pending' %}
+                                        <a href="{{ path('admin_demande_accepter', {'id': d.id}) }}" class="btn btn-outline-success btn-sm">Valider</a>
+                                        <a href="{{ path('admin_demande_refuser', {'id': d.id}) }}" class="btn btn-outline-danger btn-sm">Refuser</a>
+                                    {% else %}
+                                        <span class="text-muted">—</span>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="7" class="text-center fst-italic">Aucune demande trouvée</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-
+</div>
 {% endblock %}
