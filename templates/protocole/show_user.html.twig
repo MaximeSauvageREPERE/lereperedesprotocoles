@@ -2,17 +2,74 @@
 
 {% block title %}{{ protocole.nom }}{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        /* Card rose pour l'affichage */
+        .card-rose {
+            background-color: rgba(232, 186, 203, 0.9) !important;
+            border: 1px solid rgba(90, 58, 90, 0.7);
+        }
+
+        /* Texte */
+        .card-text {
+            color: #5a3a5a;
+        }
+
+        .card-text strong {
+            color: #5a3a5a;
+            font-weight: 600;
+        }
+
+        /* Boutons personnalisés */
+        .btn-custom-primary {
+            border: 2px solid rgba(200, 150, 180, 0.8);
+            color: #fff;
+            background-color: rgba(90, 58, 90, 0.9);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-custom-primary:hover {
+            background-color: rgba(90, 58, 90, 1);
+            border-color: rgba(200, 150, 180, 0.8);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(200, 150, 180, 0.3);
+        }
+
+        .btn-custom-secondary {
+            border: 2px solid rgba(200, 150, 180, 0.8);
+            color: #5a3a5a;
+            background-color: rgba(245, 230, 240, 0.85);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-custom-secondary:hover {
+            background-color: rgba(90, 58, 90, 0.8);
+            border-color: rgba(200, 150, 180, 0.8);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(200, 150, 180, 0.3);
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
 <div class="container mt-4 mb-5">
     <div class="row">
         <div class="col-md-12 mx-auto">
-            <div class="card shadow rounded-4 bg-light">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="mb-0">{{ protocole.nom }}</h1>
+                <a href="{{ path('app_protocole_index') }}" class="btn btn-custom-secondary">
+                    <i class="bi bi-arrow-left"></i> Retour à la liste
+                </a>
+            </div>
+
+            <div class="card card-rose shadow-sm rounded-4">
                 <div class="card-body p-4">
-                    <h1 class="card-title mb-3">{{ protocole.nom }}</h1>
-                    
                     <div class="row">
                         {% if protocole.theme and protocole.theme.rubrique %}
-                            <div class="col-md-6">
+                            <div class="col-md-6 mb-3">
                                 <p class="card-text">
                                     <strong>Rubrique :</strong> {{ protocole.theme.rubrique.nom }}
                                 </p>
@@ -20,7 +77,7 @@
                         {% endif %}
                         
                         {% if protocole.theme %}
-                            <div class="col-md-6">
+                            <div class="col-md-6 mb-3">
                                 <p class="card-text">
                                     <strong>Thème :</strong> {{ protocole.theme.nom }}
                                 </p>
@@ -30,19 +87,15 @@
                     
                     {% if protocole.fichier %}
                         <div class="mt-4">
-                            <a href="{{ vich_uploader_asset(protocole, 'pdfFile') }}" target="_blank" class="btn btn-lg btn-outline-primary">
+                            <a href="{{ vich_uploader_asset(protocole, 'pdfFile') }}" target="_blank" class="btn btn-lg btn-custom-primary">
                                 <i class="bi bi-file-pdf"></i> Télécharger le PDF
                             </a>
                         </div>
                     {% else %}
                         <div class="alert alert-info mt-4">
-                            Aucun fichier disponible pour ce protocole.
+                            <i class="bi bi-info-circle"></i> Aucun fichier disponible pour ce protocole.
                         </div>
                     {% endif %}
-                    
-                    <div class="mt-4">
-                        <a href="{{ path('app_protocole_index') }}" class="btn btn-secondary">Retour à la liste</a>
-                    </div>
                 </div>
             </div>
         </div>
