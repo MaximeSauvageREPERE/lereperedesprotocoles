@@ -84,6 +84,12 @@
             border-color: rgb(90, 58, 90, 0.4);
             box-shadow: none;
         }
+
+        .table .badge.bg-light {
+            background-color: #ebc3d2cc !important;
+            color: #5a3a5a !important;
+            border: 1px solid rgba(90, 58, 90, 0.3);
+        }
         
     </style>
 {% endblock %}
@@ -114,7 +120,7 @@
                                 <td class="text-center align-middle">
                                     {% if theme.rubrique and theme.rubrique.domaines is not empty %}
                                         {% for domaine in theme.rubrique.domaines %}
-                                            <span class="badge bg-light text-dark">{{ domaine.nom }}</span>
+                                            <span class="badge bg-light">{{ domaine.nom }}</span>
                                         {% endfor %}
                                     {% else %}
                                         —
@@ -122,7 +128,7 @@
                                 </td>
                                 <td class="text-center align-middle">
                                     {% if theme.rubrique %}
-                                        <span class="badge bg-light text-dark">{{ theme.rubrique.nom }}</span>
+                                        <span class="badge bg-light">{{ theme.rubrique.nom }}</span>
                                     {% else %}
                                         —
                                     {% endif %}

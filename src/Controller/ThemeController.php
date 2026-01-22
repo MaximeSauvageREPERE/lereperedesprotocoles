@@ -26,7 +26,7 @@ final class ThemeController extends AbstractController
         $themes = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
-            10 // Nombre d'éléments par page
+            9
         );
 
         return $this->render('theme/index.html.twig', [
