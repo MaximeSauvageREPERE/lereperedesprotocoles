@@ -2,6 +2,65 @@
 
 {% block title %}Modifier Utilisateur{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        /* Card rose */
+        .card-rose {
+            background-color: rgba(235, 195, 210, 0.9) !important;
+            border: 1px solid rgba(90, 58, 90, 0.7);
+        }
+
+        /* Inputs */
+        .form-control,
+        .form-select {
+            background-color: #f5e6f0 !important;
+            border: 1px solid #d9b3d4 !important;
+            color: #5a3a5a;
+        }
+        .form-control:focus,
+        .form-select:focus {
+            background-color: #f5e6f0 !important;
+            border-color: #5a3a5a !important;
+            box-shadow: 0 0 0 0.2rem rgba(90, 58, 90, 0.25);
+        }
+
+        /* Boutons */
+        .btn-secondary {
+            border: 2px solid rgba(200, 150, 180, 0.8);
+            color: #5a3a5a;
+            background-color: rgba(245, 230, 240, 0.85);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-primary {
+            border: 2px solid rgba(200, 150, 180, 0.8);
+            color: #5a3a5a;
+            background-color: transparent;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover,
+        .btn-outline-primary:hover {
+            background-color: rgba(90, 58, 90, 0.8);
+            border-color: rgba(200, 150, 180, 0.8);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(200, 150, 180, 0.3);
+        }
+        .btn-secondary:active,
+        .btn-secondary:focus,
+        .btn-outline-primary:active,
+        .btn-outline-primary:focus {
+            background-color: rgba(90, 58, 90, 0.8) !important;
+            border-color: rgba(200, 150, 180, 0.8) !important;
+            color: #fff !important;
+            transform: translateY(0);
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
 <div class="container mt-4 mb-5">
     <div class="row">
@@ -10,10 +69,9 @@
                 <h1 class="mb-0">Modifier un utilisateur</h1>
                 <a href="{{ path('admin_utilisateur_index') }}" class="btn btn-secondary">Retour à la liste</a>
             </div>
-            <div class="card shadow-sm mb-4 bg-light rounded-4">
+            <div class="card shadow-sm mb-4 card-rose rounded-4">
                 <div class="card-body">
                     {{ include('Admin/utilisateur/_form.html.twig', {'button_label': 'Modifier'}) }}
-                </div>
                 </div>
             </div>
         </div>
