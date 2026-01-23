@@ -62,7 +62,7 @@
         .btn-card-voir {
             border: 2px solid rgba(200, 150, 180, 0.8);
             color: #5a3a5a;
-           background-color: #f5e6f0;
+            background-color: #f5e6f0;
             font-weight: 600;
             transition: all 0.3s ease;
             border-radius: 0.375rem;
@@ -98,6 +98,32 @@
         .btn-outline-primary-filtre:active,
         .btn-outline-secondary-filtre:active {
             transform: translateY(0);
+        }
+
+        .btn-pdf {
+            border: 2px solid rgba(200, 150, 180, 0.8);
+            color: #5a3a5a;
+            background-color: #f5e6f0;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border-radius: 0.375rem;
+            padding: 0.375rem 0.75rem;
+        }
+        .btn-pdf:hover {
+            background-color: rgba(90, 58, 90, 0.8);
+            border-color: rgba(200, 150, 180, 0.8);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(200, 150, 180, 0.3);
+        }
+
+        .btn-pdf:active,
+        .btn-pdf:focus,
+        .btn-pdf:focus-visible {
+            transform: translateY(0);
+            background-color: #f5e6f0 !important;
+            border-color: rgba(200, 150, 180, 0.8) !important;
+            color: #5a3a5a !important;
         }
 
     </style>
@@ -166,7 +192,7 @@
                         <div class="card-footer bg-light border-0 d-flex justify-content-end rounded-4 gap-2">
                             <a href="{{ path('app_protocole_show', {'id': protocole.id}) }}" class="btn btn-sm btn-card-voir">Voir</a>
                             {% if protocole.fichier %}
-                                <a href="{{ vich_uploader_asset(protocole, 'pdfFile') }}" target="_blank" class="btn btn-sm btn-outline-secondary">PDF</a>
+                                <a href="{{ vich_uploader_asset(protocole, 'pdfFile') }}" target="_blank" class="btn btn-sm btn-pdf">PDF</a>
                             {% endif %}
                         </div>
                     </div>
